@@ -10,6 +10,7 @@ export interface Product {
     whatsapp_number: string
     whatsapp_message?: string
     active: boolean
+    is_promotion: boolean
     created_at: string
     updated_at: string
 }

@@ -112,6 +112,6 @@ body {
     display: flex;
 }
 
-.products-swiper .swiper-slide > * {
+.products-swiper .swiper-slide>* {
     width: 100%;
 }

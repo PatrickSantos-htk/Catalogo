@@ -27,6 +27,7 @@ export default function ProductForm() {
     const [whatsappNumber, setWhatsappNumber] = useState('')
     const [whatsappMessage, setWhatsappMessage] = useState('')
     const [active, setActive] = useState(true)
+    const [isPromotion, setIsPromotion] = useState(false)
 
     // Images
     const [existingImages, setExistingImages] = useState<string[]>([])
@@ -62,6 +63,7 @@ export default function ProductForm() {
             setWhatsappNumber(data.whatsapp_number)
             setWhatsappMessage(data.whatsapp_message || '')
             setActive(data.active)
+            setIsPromotion(data.is_promotion || false)
             setExistingImages(data.images || [])
 
             // Convert specifications object to array
@@ -219,6 +221,7 @@ export default function ProductForm() {
                 images: allImages,
                 specifications: specsObject,
                 active,
+                is_promotion: isPromotion,
             }
 
             if (isEditing && id) {
@@ -351,6 +354,19 @@ export default function ProductForm() {
                             />
                             <label htmlFor="active" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                                 Produto ativo (visível no catálogo público)
+                            </label>
+                        </div>
+
+                        <div className="flex items-center">
+                            <input
+                                type="checkbox"
+                                id="is_promotion"
+                                checked={isPromotion}
+                                onChange={(e) => setIsPromotion(e.target.checked)}
+                                className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
+                            />
+                            <label htmlFor="is_promotion" className="ml-2 block text-sm text-gray-700 dark:text-gray-300 flex items-center">
+                                🔥 Produto em promoção (destaque especial)
                             </label>
                         </div>
                     </div>

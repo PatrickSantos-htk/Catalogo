@@ -97,7 +97,7 @@ export default function AdminDashboard() {
                 const clicksWeek = analyticsData.reduce((sum, p) => sum + (p.clicks_week || 0), 0)
 
                 // Produto com mais cliques
-                const topProduct = analyticsData[0].total_clicks > 0 
+                const topProduct = analyticsData[0].total_clicks > 0
                     ? {
                         name: analyticsData[0].name,
                         clicks: analyticsData[0].total_clicks
