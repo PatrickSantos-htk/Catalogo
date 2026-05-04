@@ -24,6 +24,7 @@ export interface Database {
                     whatsapp_number: string
                     whatsapp_message: string | null
                     active: boolean
+                    is_promotion: boolean
                     created_at: string
                     updated_at: string
                 }
@@ -39,6 +40,7 @@ export interface Database {
                     whatsapp_number: string
                     whatsapp_message?: string | null
                     active?: boolean
+                    is_promotion?: boolean
                     created_at?: string
                     updated_at?: string
                 }
@@ -54,10 +56,46 @@ export interface Database {
                     whatsapp_number?: string
                     whatsapp_message?: string | null
                     active?: boolean
+                    is_promotion?: boolean
                     created_at?: string
                     updated_at?: string
                 }
             }
+            product_analytics: {
+                Row: {
+                    id: string
+                    product_id: string
+                    event_type: string
+                    created_at: string
+                }
+                Insert: {
+                    id?: string
+                    product_id: string
+                    event_type?: string
+                    created_at?: string
+                }
+                Update: {
+                    id?: string
+                    product_id?: string
+                    event_type?: string
+                    created_at?: string
+                }
+            }
         }
+        Views: {
+            product_analytics_summary: {
+                Row: {
+                    id: string | null
+                    name: string | null
+                    category: string | null
+                    total_clicks: number | null
+                    clicks_today: number | null
+                    clicks_week: number | null
+                    clicks_month: number | null
+                    last_click_at: string | null
+                }
+            }
+        }
+        Functions: {}
     }
 }
