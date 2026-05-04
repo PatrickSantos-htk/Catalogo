@@ -39,11 +39,6 @@ export default function ProductCard({ product }: ProductCardProps) {
                         {product.category}
                     </span>
                 </div>
-                {product.stock === 0 && (
-                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                        <span className="text-white font-bold text-lg">Esgotado</span>
-                    </div>
-                )}
             </div>
 
             <div className="p-5 space-y-3">
@@ -55,15 +50,6 @@ export default function ProductCard({ product }: ProductCardProps) {
                     <p className="catalog-price text-3xl font-extrabold">
                         {formatCurrency(product.price)}
                     </p>
-
-                    {product.stock > 0 && (
-                        <div className="catalog-stock flex items-center text-sm">
-                            <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
-                            </svg>
-                            {product.stock} em estoque
-                        </div>
-                    )}
                 </div>
 
                 <button className="catalog-primary-button w-full font-semibold py-2.5 px-4 rounded-lg transition-all duration-300 transform group-hover:shadow-lg">

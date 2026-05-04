@@ -23,7 +23,6 @@ export default function ProductForm() {
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
     const [category, setCategory] = useState('')
-    const [stock, setStock] = useState('')
     const [whatsappNumber, setWhatsappNumber] = useState('')
     const [whatsappMessage, setWhatsappMessage] = useState('')
     const [active, setActive] = useState(true)
@@ -47,19 +46,21 @@ export default function ProductForm() {
 
     const fetchProduct = async (productId: string) => {
         try {
-            const { data, error } = await supabase
-                .from('products')
-                .select('*')
-                .eq('id', productId)
-                .single()
+            const { data, error } = await (
+                supabase
+                    .from('products' as never)
+                    .select('*')
+                    .eq('id', productId)
+                    .single() as unknown as Promise<{ data: Product | null; error: Error | null }>
+            )
 
             if (error) throw error
+            if (!data) throw new Error('Produto não encontrado')
 
             setName(data.name)
             setDescription(data.description)
             setPrice(data.price.toString())
             setCategory(data.category)
-            setStock(data.stock.toString())
             setWhatsappNumber(data.whatsapp_number)
             setWhatsappMessage(data.whatsapp_message || '')
             setActive(data.active)
@@ -143,12 +144,6 @@ export default function ProductForm() {
             return false
         }
 
-        const stockNum = parseInt(stock)
-        if (isNaN(stockNum) || stockNum < 0) {
-            toast.error('Estoque deve ser um número válido')
-            return false
-        }
-
         if (!whatsappNumber.trim()) {
             toast.error('Número do WhatsApp é obrigatório')
             return false
@@ -201,6 +196,10 @@ export default function ProductForm() {
             // Upload new images
             const newImageUrls = await uploadImages()
             const allImages = [...existingImages, ...newImageUrls]
+            const productsTable = supabase.from('products' as never) as unknown as {
+                update: (payload: unknown) => { eq: (column: string, value: string) => Promise<{ error: Error | null }> }
+                insert: (payload: unknown) => Promise<{ error: Error | null }>
+            }
 
             // Convert specifications array to object
             const specsObject: Record<string, any> = {}
@@ -215,7 +214,7 @@ export default function ProductForm() {
                 description: description.trim(),
                 price: parseFloat(price),
                 category: category.trim(),
-                stock: parseInt(stock),
+                stock: 1,
                 whatsapp_number: whatsappNumber.replace(/\D/g, ''),
                 whatsapp_message: whatsappMessage.trim() || null,
                 images: allImages,
@@ -225,17 +224,12 @@ export default function ProductForm() {
             }
 
             if (isEditing && id) {
-                const { error } = await supabase
-                    .from('products')
-                    .update(productData)
-                    .eq('id', id)
+                const { error } = await productsTable.update(productData).eq('id', id)
 
                 if (error) throw error
                 toast.success('Produto atualizado com sucesso!')
             } else {
-                const { error } = await supabase
-                    .from('products')
-                    .insert([productData])
+                const { error } = await productsTable.insert([productData])
 
                 if (error) throw error
                 toast.success('Produto criado com sucesso!')
@@ -300,7 +294,7 @@ export default function ProductForm() {
                             />
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     Preço (R$) *
@@ -324,20 +318,6 @@ export default function ProductForm() {
                                     type="text"
                                     value={category}
                                     onChange={(e) => setCategory(e.target.value)}
-                                    className="input"
-                                    required
-                                />
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                    Estoque *
-                                </label>
-                                <input
-                                    type="number"
-                                    min="0"
-                                    value={stock}
-                                    onChange={(e) => setStock(e.target.value)}
                                     className="input"
                                     required
                                 />

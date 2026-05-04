@@ -15,10 +15,6 @@ export default function ProductList() {
     const [searchTerm, setSearchTerm] = useState('')
     const [selectedCategory, setSelectedCategory] = useState<string>('all')
 
-    useEffect(() => {
-        fetchProducts()
-    }, [])
-
     const fetchProducts = async () => {
         try {
             const { data, error } = await supabase
@@ -37,6 +33,25 @@ export default function ProductList() {
             setIsLoading(false)
         }
     }
+
+    useEffect(() => {
+        fetchProducts()
+
+        const channel = supabase
+            .channel('public-products-changes')
+            .on(
+                'postgres_changes',
+                { event: '*', schema: 'public', table: 'products' },
+                () => {
+                    fetchProducts()
+                }
+            )
+            .subscribe()
+
+        return () => {
+            void supabase.removeChannel(channel)
+        }
+    }, [])
 
     // Get unique categories
     const categories = useMemo(() => {
@@ -76,9 +91,19 @@ export default function ProductList() {
         <div className="catalog-shell min-h-screen">
             {/* Header */}
             <header className="catalog-hero shadow-xl">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+                <div className="catalog-hero-brand">
+                    <div className="catalog-brand-logo rounded-2xl">
+                        <img
+                            src="/banner%20leo.jpeg"
+                            alt="Logo da marca"
+                            className="catalog-brand-logo-image"
+                        />
+                    </div>
+                </div>
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-10 lg:pt-32 lg:pb-14">
                     <div className="catalog-hero-grid">
-                        <div className="catalog-brand-card rounded-[2rem] p-6 sm:p-8 lg:p-10 text-white">
+                        <div className="catalog-brand-card rounded-[2rem] p-6 sm:p-8 lg:p-10 text-white overflow-hidden">
                             <div className="flex flex-wrap items-center gap-3 mb-6">
                                 <span className="catalog-hero-pill inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em]">
                                     vitrine digital
