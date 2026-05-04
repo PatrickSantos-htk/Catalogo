@@ -76,24 +76,74 @@ export default function ProductList() {
         <div className="catalog-shell min-h-screen">
             {/* Header */}
             <header className="catalog-hero shadow-xl">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                    <div className="text-center">
-                        <h1 className="text-5xl font-extrabold text-white mb-4">
-                            Nossos Produtos
-                        </h1>
-                        <p className="text-xl text-[#d9d9d9] max-w-2xl mx-auto">
-                            Encontre produtos de qualidade com os melhores preços
-                        </p>
-                        <div className="mt-6">
-                            <a href="#sobre" className="text-[#d9d9d9] hover:text-white underline text-sm">
-                                Conheça nossa empresa
-                            </a>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+                    <div className="catalog-hero-grid">
+                        <div className="catalog-brand-card rounded-[2rem] p-6 sm:p-8 lg:p-10 text-white">
+                            <div className="flex flex-wrap items-center gap-3 mb-6">
+                                <span className="catalog-hero-pill inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em]">
+                                    vitrine digital
+                                </span>
+                                <span className="catalog-hero-pill inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em]">
+                                    atendimento via WhatsApp
+                                </span>
+                            </div>
+
+                            <div>
+                                <p className="text-sm uppercase tracking-[0.32em] text-[#d9d9d9] mb-2">
+                                    identidade da marca
+                                </p>
+                                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[0.98] mb-4">
+                                    Um cabeçalho forte para apresentar sua marca e seus produtos.
+                                </h1>
+                                <p className="text-base sm:text-lg text-[#d9d9d9] max-w-2xl leading-relaxed">
+                                    A imagem principal do hero agora usa o arquivo logo.jpeg como fundo do cabeçalho, com sobreposição escura para manter a leitura do conteúdo.
+                                </p>
+                            </div>
+
+                            <div className="mt-8 flex flex-wrap gap-4">
+                                <a href="#produtos" className="catalog-primary-button inline-flex items-center rounded-xl px-6 py-3 font-semibold transition-all">
+                                    Ver produtos
+                                </a>
+                                <a href="#sobre" className="catalog-hero-link inline-flex items-center rounded-xl border border-white/20 px-6 py-3 font-semibold transition-all hover:bg-white/10">
+                                    Conheça a empresa
+                                </a>
+                            </div>
+                        </div>
+
+                        <div className="grid gap-4 self-stretch">
+                            <div className="catalog-hero-stat rounded-[1.75rem] p-6 text-white">
+                                <p className="text-xs uppercase tracking-[0.28em] text-[#d9d9d9] mb-3">apresentação da marca</p>
+                                <h2 className="text-2xl font-bold mb-2">Logo no fundo, mensagem na frente.</h2>
+                                <p className="text-sm leading-relaxed text-[#d9d9d9]">
+                                    O cabeçalho agora usa diretamente o arquivo público /logo.jpeg como imagem principal do hero.
+                                </p>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="catalog-hero-stat rounded-[1.5rem] p-5 text-white">
+                                    <p className="text-3xl font-extrabold">24h</p>
+                                    <p className="mt-2 text-sm text-[#d9d9d9]">atendimento rápido e direto</p>
+                                </div>
+                                <div className="catalog-hero-stat rounded-[1.5rem] p-5 text-white">
+                                    <p className="text-3xl font-extrabold">100%</p>
+                                    <p className="mt-2 text-sm text-[#d9d9d9]">catálogo organizado para venda</p>
+                                </div>
+                            </div>
+
+                            <div className="catalog-hero-stat rounded-[1.75rem] p-6 text-white">
+                                <p className="text-xs uppercase tracking-[0.28em] text-[#d9d9d9] mb-3">estrutura do hero</p>
+                                <ul className="space-y-3 text-sm text-[#d9d9d9]">
+                                    <li>Imagem de fundo para reforçar identidade visual</li>
+                                    <li>Bloco principal com marca e chamada</li>
+                                    <li>Botões de navegação para catálogo e sobre</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </header>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div id="produtos" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 {/* Filters - Compacto */}
                 <div className="catalog-panel mb-8 rounded-[1.5rem] p-4">
                     <div className="flex flex-col sm:flex-row gap-3">
