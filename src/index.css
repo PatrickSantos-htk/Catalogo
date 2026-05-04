@@ -238,6 +238,34 @@ body {
     box-shadow: var(--catalog-shadow);
 }
 
+.catalog-detail-hero-panel {
+    background:
+        radial-gradient(circle at top right, rgba(217, 217, 217, 0.45), transparent 28%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.99) 0%, rgba(245, 245, 245, 0.98) 100%);
+    border: 1px solid rgba(13, 13, 13, 0.08);
+    box-shadow: 0 20px 44px rgba(13, 13, 13, 0.1);
+}
+
+.catalog-detail-price-row {
+    border-top: 1px solid rgba(13, 13, 13, 0.08);
+    border-bottom: 1px solid rgba(13, 13, 13, 0.08);
+}
+
+.catalog-detail-description {
+    line-height: 1.8;
+}
+
+.catalog-detail-cta-note {
+    border: 1px solid rgba(37, 211, 102, 0.16);
+    background: rgba(255, 255, 255, 0.78);
+}
+
+.catalog-detail-inline-cta {
+    background: linear-gradient(180deg, rgba(13, 13, 13, 0.03) 0%, rgba(217, 217, 217, 0.2) 100%);
+    border: 1px solid rgba(13, 13, 13, 0.08);
+    box-shadow: 0 16px 30px rgba(13, 13, 13, 0.08);
+}
+
 .catalog-detail-breadcrumb {
     background: rgba(255, 255, 255, 0.88);
     border-bottom: 1px solid var(--catalog-line);
