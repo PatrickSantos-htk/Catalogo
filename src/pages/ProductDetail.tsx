@@ -37,6 +37,22 @@ export default function ProductDetail() {
         }
     }
 
+    const trackWhatsAppClick = async () => {
+        if (!product) return
+
+        try {
+            await supabase
+                .from('product_analytics')
+                .insert({
+                    product_id: product.id,
+                    event_type: 'whatsapp_click'
+                })
+        } catch (error) {
+            // Silent fail - não queremos interromper a jornada do usuário
+            console.error('Erro ao registrar clique:', error)
+        }
+    }
+
     if (isLoading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
@@ -204,6 +220,7 @@ export default function ProductDetail() {
                                 href={whatsappLink}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                onClick={trackWhatsAppClick}
                                 className="flex items-center justify-center w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
                             >
                                 <svg className="w-7 h-7 mr-3" fill="currentColor" viewBox="0 0 24 24">
