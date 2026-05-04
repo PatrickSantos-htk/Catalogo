@@ -3,6 +3,11 @@ import { supabase } from '../lib/supabase'
 import { toast } from 'react-toastify'
 import type { Product } from '../types'
 import ProductCard from '../components/ProductCard'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Pagination, Autoplay } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 
 export default function ProductList() {
     const [products, setProducts] = useState<Product[]>([])
@@ -133,13 +138,60 @@ export default function ProductList() {
               <p className="text-gray-600 dark:text-gray-400 font-medium">
                 <span className="text-blue-600 dark:text-blue-400 font-bold text-lg">{filteredProducts.length}</span> {filteredProducts.length === 1 ? 'produto encontrado' : 'produtos encontrados'}
               </p>
+              {filteredProducts.length > 8 && (
+                <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
+                  <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+                  </svg>
+                  Use as setas para navegar
+                </span>
+              )}
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
-              {filteredProducts.map(product => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+            {filteredProducts.length > 8 ? (
+              /* Carrossel para muitos produtos */
+              <div className="mb-12 carousel-container">
+                <Swiper
+                  modules={[Navigation, Pagination, Autoplay]}
+                  spaceBetween={24}
+                  slidesPerView={1}
+                  navigation
+                  pagination={{ clickable: true }}
+                  autoplay={{
+                    delay: 5000,
+                    disableOnInteraction: false,
+                  }}
+                  breakpoints={{
+                    640: {
+                      slidesPerView: 2,
+                      spaceBetween: 20,
+                    },
+                    1024: {
+                      slidesPerView: 3,
+                      spaceBetween: 24,
+                    },
+                    1280: {
+                      slidesPerView: 4,
+                      spaceBetween: 24,
+                    },
+                  }}
+                  className="products-swiper"
+                >
+                  {filteredProducts.map(product => (
+                    <SwiperSlide key={product.id}>
+                      <ProductCard product={product} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            ) : (
+              /* Grid normal para poucos produtos */
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+                {filteredProducts.map(product => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            )}
           </>
         )}
 
