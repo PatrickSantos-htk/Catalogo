@@ -4,9 +4,8 @@ import { toast } from 'react-toastify'
 import type { Product } from '../types'
 import ProductCard from '../components/ProductCard'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, Autoplay } from 'swiper/modules'
+import { Pagination, Autoplay } from 'swiper/modules'
 import 'swiper/css'
-import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 export default function ProductList() {
@@ -285,10 +284,9 @@ export default function ProductList() {
                                     {promotions.length > 8 ? (
                                         <div className="carousel-container">
                                             <Swiper
-                                                modules={[Navigation, Pagination, Autoplay]}
+                                                modules={[Pagination, Autoplay]}
                                                 spaceBetween={24}
                                                 slidesPerView={1}
-                                                navigation
                                                 pagination={{ clickable: true }}
                                                 autoplay={{
                                                     delay: 4000,
@@ -331,24 +329,15 @@ export default function ProductList() {
                                             <span className="catalog-count font-bold text-lg">{regularProducts.length}</span> {regularProducts.length === 1 ? 'serviço disponível' : 'serviços disponíveis'}
                                         </p>
                                     </div>
-                                    {regularProducts.length > 8 && (
-                                        <span className="catalog-muted hidden text-sm sm:flex items-center">
-                                            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                            </svg>
-                                            Use as setas para navegar
-                                        </span>
-                                    )}
                                 </div>
 
-                                {regularProducts.length > 8 ? (
+                                {regularProducts.length > 4 ? (
                                     /* Carrossel para muitos produtos */
                                     <div className="mb-12 carousel-container">
                                         <Swiper
-                                            modules={[Navigation, Pagination, Autoplay]}
+                                            modules={[Pagination, Autoplay]}
                                             spaceBetween={24}
                                             slidesPerView={1}
-                                            navigation
                                             pagination={{ clickable: true }}
                                             autoplay={{
                                                 delay: 5000,
