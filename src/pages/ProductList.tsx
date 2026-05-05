@@ -20,25 +20,28 @@ export default function ProductList() {
         {
             title: 'Escada em mármore sob medida',
             label: 'Destaque principal',
-            description: 'Vídeo de destaque para mostrar imponência, acabamento e precisão em projetos especiais com mármore.',
+            description: 'Evidencia presença visual, paginação e acabamento refinado em um projeto que valoriza a circulação e o impacto do ambiente.',
             gradient: 'from-[#0d0d0d] via-[#242424] to-[#5a5a5a]',
             videoSrc: '/videos/escada.mp4',
+            videoPosition: 'center 32%',
             href: instagramProfileUrl,
         },
         {
             title: 'Acabamento em área gourmet',
             label: 'Área gourmet',
-            description: 'O vídeo da bancada entra aqui para mostrar paginação, polimento e alinhamento das peças em ambientes sociais.',
+            description: 'Mostra a bancada aplicada no ambiente, destacando alinhamento das peças, polimento e leitura elegante da composição final.',
             gradient: 'from-[#1b1b1b] via-[#313131] to-[#737373]',
             videoSrc: '/videos/bancada.mp4',
+            videoPosition: 'center 52%',
             href: instagramProfileUrl,
         },
         {
             title: 'Acabamento em banheiro',
             label: 'Ambiente interno',
-            description: 'Mostra o resultado aplicado em banheiro, reforçando limpeza visual, encaixe e sofisticação do acabamento.',
+            description: 'Apresenta um banheiro com acabamento limpo, proporção equilibrada e resultado final que reforça sofisticação e cuidado na execução.',
             gradient: 'from-[#111111] via-[#3a3a3a] to-[#7e7e7e]',
             videoSrc: '/videos/banheiro.mp4',
+            videoPosition: 'center 38%',
             href: instagramProfileUrl,
         },
     ]
@@ -418,25 +421,43 @@ export default function ProductList() {
                                 </div>
 
                                 <div className="mt-8 grid gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.95fr)]">
-                                    <article className="catalog-video-card rounded-[1.75rem] p-4 sm:p-5">
+                                    <article className="catalog-video-card group rounded-[1.75rem] p-4 sm:p-5">
                                         {featuredVideos[0].videoSrc ? (
                                             <div className="catalog-video-frame">
                                                 <div className="flex items-center gap-3 border-b border-white/10 bg-gradient-to-r from-[#0d0d0d] to-[#2d2d2d] px-4 py-3 text-white sm:px-5">
                                                     <span className="catalog-hero-pill inline-flex items-center rounded-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-xs">
                                                         {featuredVideos[0].label}
                                                     </span>
+                                                    <span className="rounded-full border border-white/16 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/85">
+                                                        Prévia contínua
+                                                    </span>
                                                 </div>
 
                                                 <video
                                                     src={featuredVideos[0].videoSrc}
                                                     className="catalog-video-player"
-                                                    controls
+                                                    style={{ objectPosition: featuredVideos[0].videoPosition }}
+                                                    autoPlay
+                                                    loop
                                                     muted
                                                     playsInline
-                                                    preload="metadata"
+                                                    preload="auto"
+                                                    aria-label={`Prévia em vídeo: ${featuredVideos[0].title}`}
                                                 >
                                                     Seu navegador não suporta reprodução de vídeo.
                                                 </video>
+
+                                                <div className="catalog-video-overlay">
+                                                    <div className="catalog-video-overlay-copy">
+                                                        <p className="catalog-video-overlay-kicker">Portfólio em obra</p>
+                                                        <p className="catalog-video-overlay-title">Execução real com acabamento de alto padrão</p>
+                                                    </div>
+                                                    <span className="catalog-video-overlay-icon" aria-hidden="true">
+                                                        <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                                            <path d="M8 5.14v13.72a1 1 0 0 0 1.53.848l10.2-6.86a1 1 0 0 0 0-1.696l-10.2-6.86A1 1 0 0 0 8 5.14Z" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
                                             </div>
                                         ) : (
                                             <a
@@ -493,7 +514,7 @@ export default function ProductList() {
 
                                     <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
                                         {featuredVideos.slice(1).map((video) => (
-                                            <article key={video.title} className="catalog-video-card rounded-[1.75rem] p-4 sm:p-5">
+                                            <article key={video.title} className="catalog-video-card group rounded-[1.75rem] p-4 sm:p-5">
                                                 {video.videoSrc ? (
                                                     <>
                                                         <div className="catalog-video-frame">
@@ -501,18 +522,36 @@ export default function ProductList() {
                                                                 <span className="catalog-hero-pill inline-flex items-center rounded-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-xs">
                                                                     {video.label}
                                                                 </span>
+                                                                <span className="rounded-full border border-white/16 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/85">
+                                                                    Loop mudo
+                                                                </span>
                                                             </div>
 
                                                             <video
                                                                 src={video.videoSrc}
                                                                 className="catalog-video-player"
-                                                                controls
+                                                                style={{ objectPosition: video.videoPosition }}
+                                                                autoPlay
+                                                                loop
                                                                 muted
                                                                 playsInline
-                                                                preload="metadata"
+                                                                preload="auto"
+                                                                aria-label={`Prévia em vídeo: ${video.title}`}
                                                             >
                                                                 Seu navegador não suporta reprodução de vídeo.
                                                             </video>
+
+                                                            <div className="catalog-video-overlay">
+                                                                <div className="catalog-video-overlay-copy">
+                                                                    <p className="catalog-video-overlay-kicker">Prévia contínua</p>
+                                                                    <p className="catalog-video-overlay-title">Detalhes reais do acabamento</p>
+                                                                </div>
+                                                                <span className="catalog-video-overlay-icon" aria-hidden="true">
+                                                                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                                                        <path d="M8 5.14v13.72a1 1 0 0 0 1.53.848l10.2-6.86a1 1 0 0 0 0-1.696l-10.2-6.86A1 1 0 0 0 8 5.14Z" />
+                                                                    </svg>
+                                                                </span>
+                                                            </div>
                                                         </div>
 
                                                         <div className="px-1 pt-4">
