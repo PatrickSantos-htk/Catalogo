@@ -14,6 +14,34 @@ export default function ProductList() {
     const [isLoading, setIsLoading] = useState(true)
     const [searchTerm, setSearchTerm] = useState('')
     const [selectedCategory, setSelectedCategory] = useState<string>('all')
+    const instagramProfileUrl = 'https://www.instagram.com/parceria_marmores.granito_?utm_source=qr&igsh=dDY3OXR4cGE5dGpio'
+    const whatsappBudgetUrl = 'https://wa.me/5521973675618'
+    const featuredVideos = [
+        {
+            title: 'Escada em mármore sob medida',
+            label: 'Destaque principal',
+            description: 'Vídeo de destaque para mostrar imponência, acabamento e precisão em projetos especiais com mármore.',
+            gradient: 'from-[#0d0d0d] via-[#242424] to-[#5a5a5a]',
+            videoSrc: '/videos/escada.mp4',
+            href: instagramProfileUrl,
+        },
+        {
+            title: 'Acabamento em área gourmet',
+            label: 'Área gourmet',
+            description: 'O vídeo da bancada entra aqui para mostrar paginação, polimento e alinhamento das peças em ambientes sociais.',
+            gradient: 'from-[#1b1b1b] via-[#313131] to-[#737373]',
+            videoSrc: '/videos/bancada.mp4',
+            href: instagramProfileUrl,
+        },
+        {
+            title: 'Acabamento em banheiro',
+            label: 'Ambiente interno',
+            description: 'Mostra o resultado aplicado em banheiro, reforçando limpeza visual, encaixe e sofisticação do acabamento.',
+            gradient: 'from-[#111111] via-[#3a3a3a] to-[#7e7e7e]',
+            videoSrc: '/videos/banheiro.mp4',
+            href: instagramProfileUrl,
+        },
+    ]
 
     const fetchProducts = async () => {
         try {
@@ -129,11 +157,11 @@ export default function ProductList() {
                                 <a href="#produtos" className="catalog-primary-button inline-flex w-full items-center justify-center rounded-xl px-6 py-3 font-semibold transition-all sm:w-auto">
                                     Ver Serviços
                                 </a>
-                                <a href="https://wa.me/5521973675618" target="_blank" rel="noopener noreferrer" className="catalog-hero-link inline-flex w-full items-center justify-center rounded-xl border border-white/20 px-6 py-3 font-semibold transition-all hover:bg-white/10 sm:w-auto">
+                                <a href={whatsappBudgetUrl} target="_blank" rel="noopener noreferrer" className="catalog-hero-link inline-flex w-full items-center justify-center rounded-xl border border-white/20 px-6 py-3 font-semibold transition-all hover:bg-white/10 sm:w-auto">
                                     Solicitar orçamento
                                 </a>
                                 <a
-                                    href="https://www.instagram.com/parceria_marmores.granito_?utm_source=qr&igsh=dDY3OXR4cGE5dGpio"
+                                    href={instagramProfileUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="catalog-hero-link inline-flex w-full items-center justify-center rounded-xl border border-white/20 px-6 py-3 font-semibold transition-all hover:bg-white/10 sm:w-auto"
@@ -356,6 +384,209 @@ export default function ProductList() {
                                 )}
                             </section>
                         )}
+
+                        <section aria-labelledby="videos-heading" className="mb-16">
+                            <div className="catalog-video-section overflow-hidden rounded-[2rem] p-6 sm:p-8 lg:p-10">
+                                <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+                                    <div className="max-w-3xl">
+                                        <div className="mb-4 flex flex-wrap items-center gap-3">
+                                            <span className="catalog-pill inline-flex items-center rounded-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-xs">
+                                                Portfólio em Vídeo
+                                            </span>
+                                            <span className="catalog-muted text-xs font-semibold uppercase tracking-[0.22em]">
+                                                Obras reais em destaque
+                                            </span>
+                                        </div>
+                                        <h2 id="videos-heading" className="catalog-heading text-2xl font-bold sm:text-3xl">
+                                            Veja como os serviços ganham vida em obra
+                                        </h2>
+                                        <p className="catalog-muted mt-3 text-base leading-relaxed sm:text-lg">
+                                            Uma seleção visual para transmitir acabamento, execução e presença real do serviço antes do cliente entrar em contato para orçamento.
+                                        </p>
+                                    </div>
+
+                                    <div className="flex flex-col gap-3 sm:flex-row">
+                                        <a
+                                            href={instagramProfileUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="catalog-primary-button inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold sm:text-base"
+                                        >
+                                            Ver mais vídeos
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div className="mt-8 grid gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.95fr)]">
+                                    <article className="catalog-video-card rounded-[1.75rem] p-4 sm:p-5">
+                                        {featuredVideos[0].videoSrc ? (
+                                            <div className="catalog-video-frame">
+                                                <div className="flex items-center gap-3 border-b border-white/10 bg-gradient-to-r from-[#0d0d0d] to-[#2d2d2d] px-4 py-3 text-white sm:px-5">
+                                                    <span className="catalog-hero-pill inline-flex items-center rounded-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-xs">
+                                                        {featuredVideos[0].label}
+                                                    </span>
+                                                </div>
+
+                                                <video
+                                                    src={featuredVideos[0].videoSrc}
+                                                    className="catalog-video-player"
+                                                    controls
+                                                    muted
+                                                    playsInline
+                                                    preload="metadata"
+                                                >
+                                                    Seu navegador não suporta reprodução de vídeo.
+                                                </video>
+                                            </div>
+                                        ) : (
+                                            <a
+                                                href={featuredVideos[0].href}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className={`flex min-h-[280px] flex-col justify-between rounded-[1.5rem] bg-gradient-to-br p-5 text-white transition-transform duration-300 hover:scale-[1.01] sm:min-h-[360px] sm:p-6 ${featuredVideos[0].gradient}`}
+                                                aria-label={`Abrir vídeo ${featuredVideos[0].title}`}
+                                            >
+                                                <div className="flex items-start justify-between gap-3">
+                                                    <span className="catalog-hero-pill inline-flex items-center rounded-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-xs">
+                                                        {featuredVideos[0].label}
+                                                    </span>
+                                                </div>
+
+                                                <div className="flex items-end justify-between gap-4">
+                                                    <div>
+                                                        <p className="mb-2 text-xs uppercase tracking-[0.24em] text-white/70">
+                                                            Vídeo em destaque
+                                                        </p>
+                                                        <h3 className="max-w-xl text-2xl font-bold leading-tight sm:text-3xl">
+                                                            {featuredVideos[0].title}
+                                                        </h3>
+                                                    </div>
+
+                                                    <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 shadow-lg">
+                                                        <svg className="ml-1 h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                            <path d="M8 5.14v13.72a1 1 0 0 0 1.53.848l10.2-6.86a1 1 0 0 0 0-1.696l-10.2-6.86A1 1 0 0 0 8 5.14Z" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        )}
+
+                                        <div className="catalog-video-meta mt-4 rounded-[1.5rem] p-5 sm:p-6">
+                                            <p className="mb-2 text-xs uppercase tracking-[0.24em] text-[#404040]">
+                                                Projeto em destaque
+                                            </p>
+                                            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                                                <div className="max-w-xl">
+                                                    <p className="catalog-heading text-lg font-bold sm:text-xl">
+                                                        {featuredVideos[0].title}
+                                                    </p>
+                                                    <p className="catalog-muted mt-2 text-sm leading-relaxed sm:text-base">
+                                                        {featuredVideos[0].description}
+                                                    </p>
+                                                </div>
+                                                <span className="catalog-pill inline-flex w-fit items-center rounded-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-xs">
+                                                    Acabamento premium
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </article>
+
+                                    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
+                                        {featuredVideos.slice(1).map((video) => (
+                                            <article key={video.title} className="catalog-video-card rounded-[1.75rem] p-4 sm:p-5">
+                                                {video.videoSrc ? (
+                                                    <>
+                                                        <div className="catalog-video-frame">
+                                                            <div className="flex items-center gap-3 border-b border-white/10 bg-gradient-to-r from-[#0d0d0d] to-[#2d2d2d] px-4 py-3 text-white sm:px-5">
+                                                                <span className="catalog-hero-pill inline-flex items-center rounded-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-xs">
+                                                                    {video.label}
+                                                                </span>
+                                                            </div>
+
+                                                            <video
+                                                                src={video.videoSrc}
+                                                                className="catalog-video-player"
+                                                                controls
+                                                                muted
+                                                                playsInline
+                                                                preload="metadata"
+                                                            >
+                                                                Seu navegador não suporta reprodução de vídeo.
+                                                            </video>
+                                                        </div>
+
+                                                        <div className="px-1 pt-4">
+                                                            <p className="catalog-heading text-lg font-bold">
+                                                                {video.title}
+                                                            </p>
+                                                            <p className="catalog-muted mt-2 text-sm leading-relaxed">
+                                                                {video.description}
+                                                            </p>
+                                                        </div>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <a
+                                                            href={video.href}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className={`flex min-h-[220px] flex-col justify-between rounded-[1.5rem] bg-gradient-to-br p-5 text-white transition-transform duration-300 hover:scale-[1.01] sm:min-h-[240px] ${video.gradient}`}
+                                                            aria-label={`Abrir vídeo ${video.title}`}
+                                                        >
+                                                            <div className="flex items-start gap-3">
+                                                                <span className="catalog-hero-pill inline-flex items-center rounded-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-xs">
+                                                                    {video.label}
+                                                                </span>
+                                                            </div>
+
+                                                            <div className="flex items-end justify-between gap-4">
+                                                                <h3 className="max-w-[14rem] text-xl font-bold leading-tight">
+                                                                    {video.title}
+                                                                </h3>
+
+                                                                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 shadow-lg">
+                                                                    <svg className="ml-1 h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                                        <path d="M8 5.14v13.72a1 1 0 0 0 1.53.848l10.2-6.86a1 1 0 0 0 0-1.696l-10.2-6.86A1 1 0 0 0 8 5.14Z" />
+                                                                    </svg>
+                                                                </span>
+                                                            </div>
+                                                        </a>
+
+                                                        <div className="px-2 pt-4">
+                                                            <p className="catalog-muted text-sm leading-relaxed">
+                                                                {video.description}
+                                                            </p>
+                                                        </div>
+                                                    </>
+                                                )}
+                                            </article>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="catalog-video-footer mt-6 rounded-[1.5rem] p-5 sm:p-6">
+                                    <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                                        <div className="max-w-2xl">
+                                            <p className="catalog-heading text-lg font-bold">
+                                                Quer um resultado assim no seu projeto?
+                                            </p>
+                                            <p className="catalog-muted mt-2 text-sm leading-relaxed sm:text-base">
+                                                Envie medidas, referências ou a ideia do ambiente e receba um atendimento consultivo para orçamento direto no WhatsApp.
+                                            </p>
+                                        </div>
+
+                                        <a
+                                            href={whatsappBudgetUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="catalog-primary-button inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold sm:text-base"
+                                        >
+                                            Solicitar orçamento
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </>
                 )}
 
