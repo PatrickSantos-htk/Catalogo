@@ -13,7 +13,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <Link
             to={`/produto/${product.id}`}
             aria-label={`Ver detalhes do serviço ${product.name}`}
-            className="group catalog-card rounded-[1.75rem] transition-all duration-300 overflow-hidden transform hover:-translate-y-1"
+            className="group catalog-card h-full overflow-hidden rounded-[1.4rem] transition-all duration-300 transform hover:-translate-y-1 sm:rounded-[1.75rem]"
         >
             <div className="catalog-card-image aspect-square overflow-hidden relative">
                 <img
@@ -25,39 +25,39 @@ export default function ProductCard({ product }: ProductCardProps) {
 
                 {/* Promotion Badge */}
                 {product.is_promotion && (
-                    <div className="absolute top-3 left-3 z-10">
+                    <div className="absolute left-2.5 top-2.5 z-10 sm:left-3 sm:top-3">
                         <div className="relative">
                             <div className="absolute inset-0 bg-black blur-md opacity-30 rounded-lg"></div>
-                            <span className="catalog-promo-badge relative inline-flex items-center px-3 py-1.5 text-xs font-extrabold rounded-lg shadow-xl">
+                            <span className="catalog-promo-badge relative inline-flex items-center rounded-lg px-2.5 py-1 text-[11px] font-extrabold shadow-xl sm:px-3 sm:py-1.5 sm:text-xs">
                                 🔥 PROMOÇÃO
                             </span>
                         </div>
                     </div>
                 )}
 
-                <div className="absolute top-3 right-3">
-                    <span className="catalog-category-badge inline-block px-3 py-1 text-xs font-bold rounded-full shadow-lg">
+                <div className="absolute right-2.5 top-2.5 sm:right-3 sm:top-3">
+                    <span className="catalog-category-badge inline-block rounded-full px-2.5 py-1 text-[11px] font-bold shadow-lg sm:px-3 sm:text-xs">
                         {product.category}
                     </span>
                 </div>
             </div>
 
-            <div className="p-5 space-y-3">
-                <h3 className="catalog-heading font-bold text-lg line-clamp-2 min-h-[3.5rem]">
+            <div className="space-y-3 p-4 sm:p-5">
+                <h3 className="catalog-heading min-h-[3rem] line-clamp-2 text-base font-bold sm:min-h-[3.5rem] sm:text-lg">
                     {product.name}
                 </h3>
 
-                <p className="catalog-muted text-sm leading-relaxed min-h-[2.75rem]">
+                <p className="catalog-muted min-h-0 text-sm leading-relaxed sm:min-h-[2.75rem]">
                     Atendimento consultivo e execução sob medida para o seu projeto.
                 </p>
 
                 <div className="flex items-center justify-between">
-                    <p className="catalog-price text-3xl font-extrabold">
+                    <p className="catalog-price text-2xl font-extrabold sm:text-3xl">
                         {formatCurrency(product.price)}
                     </p>
                 </div>
 
-                <span className="catalog-primary-button block w-full text-center font-semibold py-2.5 px-4 rounded-lg transition-all duration-300 transform group-hover:shadow-lg">
+                <span className="catalog-primary-button block w-full rounded-lg px-4 py-2.5 text-center text-sm font-semibold transition-all duration-300 transform group-hover:shadow-lg sm:text-base">
                     Ver Detalhes e Orçamento
                 </span>
             </div>

@@ -48,11 +48,11 @@ export default function Login() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 px-4">
+        <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-8 dark:bg-gray-900">
             <div className="max-w-md w-full">
                 <div className="card">
                     <div className="text-center mb-8">
-                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+                        <h1 className="text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl">
                             Painel Admin
                         </h1>
                         <p className="text-gray-600 dark:text-gray-400 mt-2">

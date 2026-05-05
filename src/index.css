@@ -45,7 +45,7 @@ body {
     }
 
     .card {
-        @apply bg-white dark:bg-gray-800 rounded-lg shadow-md p-6;
+        @apply bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 sm:p-6;
     }
 
     .input {
@@ -306,6 +306,38 @@ body {
     .catalog-hero-brand {
         position: static;
         margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .catalog-hero-grid {
+        gap: 1.25rem;
+    }
+
+    .catalog-brand-logo-image {
+        max-width: 96px;
+    }
+
+    .products-swiper {
+        padding: 12px 0 48px 0 !important;
+    }
+
+    .products-swiper .swiper-button-next,
+    .products-swiper .swiper-button-prev {
+        display: none;
+    }
+
+    .products-swiper .swiper-pagination {
+        bottom: 10px !important;
+    }
+
+    .products-swiper .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+    }
+
+    .products-swiper .swiper-pagination-bullet-active {
+        width: 24px;
     }
 }
 

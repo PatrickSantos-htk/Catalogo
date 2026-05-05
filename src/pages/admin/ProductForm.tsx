@@ -253,9 +253,9 @@ export default function ProductForm() {
     }
 
     return (
-        <div className="max-w-4xl">
+        <div className="mx-auto w-full max-w-4xl">
             <div className="mb-6">
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl">
                     {isEditing ? 'Editar Produto' : 'Novo Produto'}
                 </h1>
             </div>
@@ -364,7 +364,7 @@ export default function ProductForm() {
                             <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                                 Imagens atuais:
                             </p>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 sm:gap-4">
                                 {existingImages.map((url, index) => (
                                     <div key={index} className="relative group">
                                         <img
@@ -375,7 +375,7 @@ export default function ProductForm() {
                                         <button
                                             type="button"
                                             onClick={() => removeExistingImage(index)}
-                                            className="absolute top-2 right-2 bg-red-600 text-white p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                                            className="absolute top-2 right-2 rounded bg-red-600 p-1 text-white opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100"
                                         >
                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -393,7 +393,7 @@ export default function ProductForm() {
                             <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                                 Novas imagens:
                             </p>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 sm:gap-4">
                                 {imagePreviews.map((preview, index) => (
                                     <div key={index} className="relative group">
                                         <img
@@ -404,7 +404,7 @@ export default function ProductForm() {
                                         <button
                                             type="button"
                                             onClick={() => removeNewImage(index)}
-                                            className="absolute top-2 right-2 bg-red-600 text-white p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                                            className="absolute top-2 right-2 rounded bg-red-600 p-1 text-white opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100"
                                         >
                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -475,14 +475,14 @@ export default function ProductForm() {
 
                 {/* Specifications */}
                 <div className="card">
-                    <div className="flex justify-between items-center mb-4">
+                    <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                             Especificações Técnicas
                         </h2>
                         <button
                             type="button"
                             onClick={addSpecification}
-                            className="btn-secondary text-sm"
+                            className="btn-secondary w-full text-sm sm:w-auto"
                         >
                             + Adicionar
                         </button>
@@ -490,26 +490,26 @@ export default function ProductForm() {
 
                     <div className="space-y-3">
                         {specifications.map((spec, index) => (
-                            <div key={index} className="flex gap-2">
+                            <div key={index} className="flex flex-col gap-2 sm:flex-row">
                                 <input
                                     type="text"
                                     value={spec.key}
                                     onChange={(e) => updateSpecification(index, 'key', e.target.value)}
                                     placeholder="Nome (ex: Peso)"
-                                    className="input flex-1"
+                                    className="input w-full sm:flex-1"
                                 />
                                 <input
                                     type="text"
                                     value={spec.value}
                                     onChange={(e) => updateSpecification(index, 'value', e.target.value)}
                                     placeholder="Valor (ex: 2kg)"
-                                    className="input flex-1"
+                                    className="input w-full sm:flex-1"
                                 />
                                 {specifications.length > 1 && (
                                     <button
                                         type="button"
                                         onClick={() => removeSpecification(index)}
-                                        className="btn-danger"
+                                        className="btn-danger w-full sm:w-auto"
                                     >
                                         Remover
                                     </button>
@@ -520,18 +520,18 @@ export default function ProductForm() {
                 </div>
 
                 {/* Submit Buttons */}
-                <div className="flex gap-4">
+                <div className="flex flex-col gap-3 sm:flex-row">
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
                     >
                         {isLoading ? 'Salvando...' : isEditing ? 'Atualizar Produto' : 'Criar Produto'}
                     </button>
                     <button
                         type="button"
                         onClick={() => navigate('/admin/produtos')}
-                        className="btn-secondary"
+                        className="btn-secondary w-full sm:w-auto"
                     >
                         Cancelar
                     </button>

@@ -104,17 +104,17 @@ export default function AdminProducts() {
     }
 
     return (
-        <div className="space-y-6">
-            <div className="flex justify-between items-center">
+        <div className="space-y-5 sm:space-y-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl">
                         Gerenciar Produtos
                     </h1>
                     <p className="text-gray-600 dark:text-gray-400 mt-2">
                         {filteredProducts.length} {filteredProducts.length === 1 ? 'produto' : 'produtos'}
                     </p>
                 </div>
-                <Link to="/admin/produtos/novo" className="btn-primary">
+                <Link to="/admin/produtos/novo" className="btn-primary inline-flex w-full items-center justify-center sm:w-auto">
                     + Novo Produto
                 </Link>
             </div>
@@ -153,85 +153,148 @@ export default function AdminProducts() {
                     </p>
                 </div>
             ) : (
-                <div className="card overflow-x-auto">
-                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead>
-                            <tr>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                    Imagem
-                                </th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                    Nome
-                                </th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                    Categoria
-                                </th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                    Preço
-                                </th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                    Status
-                                </th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                    Ações
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                            {filteredProducts.map((product) => (
-                                <tr key={product.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        <img
-                                            src={product.images[0] || '/placeholder-product.png'}
-                                            alt={product.name}
-                                            className="h-16 w-16 object-cover rounded"
-                                        />
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        <div className="text-sm font-medium text-gray-900 dark:text-white">
-                                            {product.name}
+                <div className="card space-y-4">
+                    <div className="space-y-3 md:hidden">
+                        {filteredProducts.map((product) => (
+                            <article key={product.id} className="rounded-2xl border border-gray-200 p-4 dark:border-gray-700">
+                                <div className="flex items-start gap-3">
+                                    <img
+                                        src={product.images[0] || '/placeholder-product.png'}
+                                        alt={product.name}
+                                        className="h-16 w-16 rounded-xl object-cover"
+                                    />
+
+                                    <div className="min-w-0 flex-1">
+                                        <div className="flex flex-wrap items-start justify-between gap-2">
+                                            <div className="min-w-0">
+                                                <h2 className="truncate text-sm font-semibold text-gray-900 dark:text-white">
+                                                    {product.name}
+                                                </h2>
+                                                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                                    Criado em {formatDate(product.created_at)}
+                                                </p>
+                                            </div>
+
+                                            <button
+                                                onClick={() => handleToggleActive(product.id, product.active)}
+                                                className={`rounded-full px-3 py-1 text-xs font-medium ${product.active
+                                                    ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300'
+                                                    : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300'
+                                                    }`}
+                                            >
+                                                {product.active ? 'Ativo' : 'Inativo'}
+                                            </button>
                                         </div>
-                                        <div className="text-sm text-gray-500 dark:text-gray-400">
-                                            Criado em {formatDate(product.created_at)}
+
+                                        <div className="mt-3 flex flex-wrap items-center gap-2">
+                                            <span className="rounded-full bg-blue-100 px-2.5 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
+                                                {product.category}
+                                            </span>
+                                            <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                                                {formatCurrency(product.price)}
+                                            </span>
                                         </div>
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        <span className="px-2 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded">
-                                            {product.category}
-                                        </span>
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white font-medium">
-                                        {formatCurrency(product.price)}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        <button
-                                            onClick={() => handleToggleActive(product.id, product.active)}
-                                            className={`px-3 py-1 text-xs font-medium rounded ${product.active
-                                                ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
-                                                : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
-                                                }`}
-                                        >
-                                            {product.active ? 'Ativo' : 'Inativo'}
-                                        </button>
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                        <Link
-                                            to={`/admin/produtos/editar/${product.id}`}
-                                            className="text-blue-600 dark:text-blue-400 hover:underline"
-                                        >
-                                            Editar
-                                        </Link>
-                                        <button
-                                            onClick={() => handleDelete(product.id, product.images)}
-                                            className="text-red-600 dark:text-red-400 hover:underline"
-                                        >
-                                            Excluir
-                                        </button>
-                                    </td>
+                                    </div>
+                                </div>
+
+                                <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+                                    <Link
+                                        to={`/admin/produtos/editar/${product.id}`}
+                                        className="inline-flex flex-1 items-center justify-center rounded-xl bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                                    >
+                                        Editar
+                                    </Link>
+                                    <button
+                                        onClick={() => handleDelete(product.id, product.images)}
+                                        className="inline-flex flex-1 items-center justify-center rounded-xl bg-red-50 px-4 py-2 text-sm font-medium text-red-600 transition-colors hover:bg-red-100 dark:bg-red-950/30 dark:text-red-400 dark:hover:bg-red-950/50"
+                                    >
+                                        Excluir
+                                    </button>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+
+                    <div className="hidden overflow-x-auto md:block">
+                        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead>
+                                <tr>
+                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                        Imagem
+                                    </th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                        Nome
+                                    </th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                        Categoria
+                                    </th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                        Preço
+                                    </th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                        Status
+                                    </th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                        Ações
+                                    </th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                                {filteredProducts.map((product) => (
+                                    <tr key={product.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                                        <td className="whitespace-nowrap px-6 py-4">
+                                            <img
+                                                src={product.images[0] || '/placeholder-product.png'}
+                                                alt={product.name}
+                                                className="h-16 w-16 rounded object-cover"
+                                            />
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <div className="text-sm font-medium text-gray-900 dark:text-white">
+                                                {product.name}
+                                            </div>
+                                            <div className="text-sm text-gray-500 dark:text-gray-400">
+                                                Criado em {formatDate(product.created_at)}
+                                            </div>
+                                        </td>
+                                        <td className="whitespace-nowrap px-6 py-4">
+                                            <span className="rounded bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
+                                                {product.category}
+                                            </span>
+                                        </td>
+                                        <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                                            {formatCurrency(product.price)}
+                                        </td>
+                                        <td className="whitespace-nowrap px-6 py-4">
+                                            <button
+                                                onClick={() => handleToggleActive(product.id, product.active)}
+                                                className={`rounded px-3 py-1 text-xs font-medium ${product.active
+                                                    ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300'
+                                                    : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300'
+                                                    }`}
+                                            >
+                                                {product.active ? 'Ativo' : 'Inativo'}
+                                            </button>
+                                        </td>
+                                        <td className="whitespace-nowrap px-6 py-4 text-sm font-medium space-x-2">
+                                            <Link
+                                                to={`/admin/produtos/editar/${product.id}`}
+                                                className="text-blue-600 hover:underline dark:text-blue-400"
+                                            >
+                                                Editar
+                                            </Link>
+                                            <button
+                                                onClick={() => handleDelete(product.id, product.images)}
+                                                className="text-red-600 hover:underline dark:text-red-400"
+                                            >
+                                                Excluir
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             )}
         </div>
