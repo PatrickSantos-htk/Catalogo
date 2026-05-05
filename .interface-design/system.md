@@ -1,9 +1,9 @@
 # Design System
 
 ## Direction
-- Personality: Sobriedade premium para catálogo de mármore e granito, com foco em confiança, acabamento e atendimento direto.
-- Product world: superfícies minerais, showroom de alto padrão, corte sob medida, instalação profissional, orçamento consultivo.
-- Signature: contraste entre blocos escuros do hero e painéis claros com vidro fosco, mantendo a sensação de catálogo sofisticado e técnico.
+- Personality: Sobriedade premium para um e-commerce de serviços em mármore e granito, com foco em confiança, acabamento e atendimento direto.
+- Product world: superfícies minerais, showroom de alto padrão, venda consultiva, corte sob medida, instalação profissional e orçamento orientado por projeto.
+- Signature: contraste entre blocos escuros do hero e painéis claros com vidro fosco, mantendo a sensação de vitrine sofisticada de serviços e não de loja genérica.
 
 ## Tokens
 
@@ -38,36 +38,41 @@
 - Headings: peso alto, contraste forte, escala ampla em hero e detalhe
 - Body: neutro, legível e com ritmo confortável
 - Labels: uppercase com tracking aberto para contexto técnico e premium
-- Tone: direto, comercial e seguro; evitar linguagem excessivamente promocional ou genérica
+- Tone: direto, comercial e seguro; evitar linguagem excessivamente promocional, varejista ou genérica
 
 ## Surface Rules
 - Hero: escuro, cinematográfico, com banner fotográfico e overlay em gradiente
 - Painéis da vitrine: claros, levemente translúcidos, borda discreta e sombra suave
 - Destaques promocionais: manter a base neutra do sistema; promoções usam ênfase por estrutura, não por excesso de cor
-- Detalhe do produto: imagem e descrição em uma coluna, decisão comercial e contato em outra
+- Detalhe do serviço: imagem e descrição em uma coluna, decisão comercial e contato em outra
 
 ## Patterns
 
 ### Hero Publico
 - Estrutura: grade em duas colunas, com bloco principal de narrativa e coluna de diferenciais
 - Superfície: vidro escuro com blur e borda clara translúcida
-- Conteúdo: headline forte, texto curto, CTAs diretos e selos de contexto
+- Conteúdo: headline forte, texto curto, CTAs diretos e selos de contexto voltados para contratação e orçamento
 
 ### Card de Produto
 - Superfície: fundo claro em degradê suave
 - Imagem: quadrada, dominante e com zoom leve no hover
-- Conteúdo: categoria visível, nome forte, preço destacado, CTA simples
+- Conteúdo: categoria visível, nome forte, oferta de serviço clara, preço ou chamada de orçamento, CTA simples
 - Comportamento: leve elevação no hover, sem excesso de animação
 
 ### Filtros do Catálogo
 - Estrutura: barra compacta em painel claro
 - Inputs: brancos, borda cinza translúcida, foco preto suave
-- Objetivo: parecer utilitário e refinado, sem competir com os produtos
+- Objetivo: parecer utilitário e refinado, sem competir com os serviços expostos na vitrine
 
 ### Painel de Detalhe
 - Estrutura: coluna esquerda para galeria e descrição; coluna direita para categoria, preço e CTA
 - Preço: bloco principal com divisor horizontal e tipografia grande
 - CTA: fica dentro do bloco principal, com destaque claro e botão verde de WhatsApp
+
+### Logica Comercial
+- Tratar a interface como e-commerce de serviços: a vitrine vende capacidade, qualidade, execução e confiança.
+- O preço pode existir, mas o principal gatilho comercial é orçamento e conversa consultiva.
+- A navegação deve ajudar o usuário a sair da dúvida e chegar ao contato.
 
 ### Botao Primario da Vitrine
 - Fundo: gradiente escuro entre `#0d0d0d` e `#404040`
@@ -80,12 +85,13 @@
 - A cópia deve reforçar orçamento, atendimento rápido e contato direto
 
 ## Copy Guidelines
-- Priorizar: orçamento, acabamento, precisão, alto padrão, sob medida, atendimento rápido
-- Evitar: frases muito genéricas de marketing ou excesso de adjetivos sem informação concreta
-- O texto deve sempre parecer de catálogo de serviço especializado, não de loja genérica
+- Priorizar: orçamento, acabamento, precisão, alto padrão, sob medida, atendimento rápido, execução profissional
+- Evitar: frases muito genéricas de marketing, linguagem de varejo puro ou excesso de adjetivos sem informação concreta
+- O texto deve sempre parecer de e-commerce de serviço especializado, não de loja genérica de produto físico
 
 ## Constraints
 - Não introduzir paletas coloridas fora do contexto do catálogo sem motivo forte
 - Não usar layouts excessivamente genéricos de e-commerce padrão
 - Não misturar muitos estilos de card na mesma seção sem motivo de conteúdo
 - Preservar a separação visual entre área pública sofisticada e admin utilitário
+- Evitar decisões que façam a vitrine parecer marketplace comum; a percepção deve ser de serviço premium e atendimento consultivo

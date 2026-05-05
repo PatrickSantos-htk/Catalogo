@@ -1,6 +1,6 @@
 # Catálogo de Produtos
 
-Sistema completo de catálogo de produtos com painel administrativo. Clientes podem visualizar produtos e entrar em contato via WhatsApp. Administradores gerenciam o catálogo através de um painel protegido.
+Sistema completo de catálogo comercial para um e-commerce de serviços com painel administrativo. Clientes podem visualizar a vitrine da empresa, entender os serviços oferecidos e entrar em contato via WhatsApp para orçamento. Administradores gerenciam o catálogo através de um painel protegido.
 
 ## 📚 Documentação Adicional
 
@@ -18,7 +18,7 @@ Sistema completo de catálogo de produtos com painel administrativo. Clientes po
 ## ✨ Funcionalidades
 
 ### Público
-- ✅ Visualização de catálogo de produtos
+- ✅ Visualização de catálogo comercial de serviços
 - ✅ Busca por nome/descrição
 - ✅ Filtro por categoria
 - ✅ Página de detalhes com galeria de imagens

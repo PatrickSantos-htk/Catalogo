@@ -11,8 +11,8 @@ export function generateWhatsAppLink(
 
     // Define mensagem padrão se não fornecida
     const defaultMessage = productName
-        ? `Olá! Tenho interesse no produto: ${productName}`
-        : 'Olá! Tenho interesse em seus produtos.'
+        ? `Olá! Tenho interesse neste serviço: ${productName}`
+        : 'Olá! Gostaria de solicitar um orçamento para um dos seus serviços.'
 
     const finalMessage = message || defaultMessage
 

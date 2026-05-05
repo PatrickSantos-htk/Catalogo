@@ -46,6 +46,10 @@ export default function ProductCard({ product }: ProductCardProps) {
                     {product.name}
                 </h3>
 
+                <p className="catalog-muted text-sm leading-relaxed min-h-[2.75rem]">
+                    Atendimento consultivo e execucao sob medida para o seu projeto.
+                </p>
+
                 <div className="flex items-center justify-between">
                     <p className="catalog-price text-3xl font-extrabold">
                         {formatCurrency(product.price)}
@@ -53,7 +57,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 </div>
 
                 <button className="catalog-primary-button w-full font-semibold py-2.5 px-4 rounded-lg transition-all duration-300 transform group-hover:shadow-lg">
-                    Ver Detalhes
+                    Ver detalhes e orcamento
                 </button>
             </div>
         </Link>

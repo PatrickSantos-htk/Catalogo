@@ -106,28 +106,28 @@ export default function ProductList() {
                         <div className="catalog-brand-card rounded-[2rem] p-6 sm:p-8 lg:p-10 text-white overflow-hidden">
                             <div className="flex flex-wrap items-center gap-3 mb-6">
                                 <span className="catalog-hero-pill inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em]">
-                                    alto padrão
+                                    Orçamento Consultivo
                                 </span>
                                 <span className="catalog-hero-pill inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em]">
-                                    atendimento via WhatsApp
+                                    Execução Sob Medida
                                 </span>
                             </div>
 
                             <div>
                                 <p className="text-sm uppercase tracking-[0.32em] text-[#d9d9d9] mb-2">
-                                    mármore e granito
+                                    Serviços em Mármore e Granito
                                 </p>
                                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[0.98] mb-4">
-                                    Acabamentos em mármore e granito com qualidade profissional e alto padrão.
+                                    Seu projeto em mármore e granito com acabamento de alto padrão, do orçamento à instalação.
                                 </h1>
                                 <p className="text-base sm:text-lg text-[#d9d9d9] max-w-2xl leading-relaxed">
-                                    Trabalhamos com cortes sob medida, instalação especializada e materiais selecionados para garantir um acabamento impecável em cada projeto.
+                                    Atendemos projetos residenciais, comerciais e corporativos com orientação técnica, corte sob medida, instalação especializada e um atendimento rápido para transformar sua ideia em execução.
                                 </p>
                             </div>
 
                             <div className="mt-8 flex flex-wrap gap-4">
                                 <a href="#produtos" className="catalog-primary-button inline-flex items-center rounded-xl px-6 py-3 font-semibold transition-all">
-                                    Ver produtos
+                                    Ver serviços
                                 </a>
                                 <a href="https://wa.me/5521973675618" target="_blank" className="catalog-hero-link inline-flex items-center rounded-xl border border-white/20 px-6 py-3 font-semibold transition-all hover:bg-white/10">
                                     Solicitar orçamento
@@ -149,30 +149,30 @@ export default function ProductList() {
 
                         <div className="grid gap-4 self-stretch">
                             <div className="catalog-hero-stat rounded-[1.75rem] p-6 text-white">
-                                <p className="text-xs uppercase tracking-[0.28em] text-[#d9d9d9] mb-3">especialistas</p>
-                                <h2 className="text-2xl font-bold mb-2">Precisão em cada detalhe</h2>
+                                <p className="text-xs uppercase tracking-[0.28em] text-[#d9d9d9] mb-3">Atendimento Especializado</p>
+                                <h2 className="text-2xl font-bold mb-2">Precisão técnica em cada etapa do serviço</h2>
                                 <p className="text-sm leading-relaxed text-[#d9d9d9]">
-                                    Profissionais experientes em corte, acabamento e instalação de mármores, granitos e lâminas, garantindo qualidade e durabilidade.
+                                    Equipe experiente em medição, corte, acabamento e instalação para entregar segurança, durabilidade e resultado final à altura do seu projeto.
                                 </p>
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="catalog-hero-stat rounded-[1.5rem] p-5 text-white">
-                                    <p className="text-3xl font-extrabold">Rápido</p>
-                                    <p className="mt-2 text-sm text-[#d9d9d9]">atendimento direto e sem enrolação</p>
+                                    <p className="text-3xl font-extrabold">Agilidade</p>
+                                    <p className="mt-2 text-sm text-[#d9d9d9]">Orçamento e retorno direto para acelerar sua decisão</p>
                                 </div>
                                 <div className="catalog-hero-stat rounded-[1.5rem] p-5 text-white">
-                                    <p className="text-3xl font-extrabold">Qualidade</p>
-                                    <p className="mt-2 text-sm text-[#d9d9d9]">acabamento de alto padrão</p>
+                                    <p className="text-3xl font-extrabold">Execução</p>
+                                    <p className="mt-2 text-sm text-[#d9d9d9]">Acabamento profissional do planejamento à instalação</p>
                                 </div>
                             </div>
 
                             <div className="catalog-hero-stat rounded-[1.75rem] p-6 text-white">
-                                <p className="text-xs uppercase tracking-[0.28em] text-[#d9d9d9] mb-3">diferencial</p>
+                                <p className="text-xs uppercase tracking-[0.28em] text-[#d9d9d9] mb-3">Como Trabalhamos</p>
                                 <ul className="space-y-3 text-sm text-[#d9d9d9]">
-                                    <li>Cortes sob medida para qualquer projeto</li>
-                                    <li>Instalação profissional e segura</li>
-                                    <li>Parceria com profissionais e obras</li>
+                                    <li>Análise do projeto para indicar a melhor solução</li>
+                                    <li>Corte sob medida com acabamento alinhado ao ambiente</li>
+                                    <li>Instalação profissional para residências, empresas e obras</li>
                                 </ul>
                             </div>
                         </div>
@@ -187,7 +187,7 @@ export default function ProductList() {
                         <div className="flex-1">
                             <input
                                 type="text"
-                                placeholder="🔍 Buscar produtos..."
+                                placeholder="🔍 Buscar serviços e soluções..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 className="catalog-input w-full px-4 py-2.5 rounded-lg"
@@ -220,8 +220,8 @@ export default function ProductList() {
                             </svg>
                             <p className="catalog-muted text-lg font-medium">
                                 {searchTerm || selectedCategory !== 'all'
-                                    ? 'Nenhum produto encontrado'
-                                    : 'Nenhum produto disponível no momento'}
+                                    ? 'Nenhum serviço encontrado'
+                                    : 'Nenhum serviço disponível no momento'}
                             </p>
                             <p className="catalog-muted text-sm mt-2 opacity-80">
                                 Tente ajustar seus filtros de busca
@@ -248,7 +248,7 @@ export default function ProductList() {
 
                                 <div className="catalog-promo-section p-6 rounded-2xl">
                                     <p className="catalog-heading text-center font-bold text-lg mb-6">
-                                        ⚡ {promotions.length} {promotions.length === 1 ? 'produto em promoção' : 'produtos em promoção'} ⚡
+                                        ⚡ {promotions.length} {promotions.length === 1 ? 'serviço em destaque' : 'serviços em destaque'} ⚡
                                     </p>
 
                                     {promotions.length > 8 ? (
@@ -294,10 +294,10 @@ export default function ProductList() {
                                 <div className="mb-6 flex items-center justify-between">
                                     <div>
                                         <h2 className="catalog-heading text-2xl font-bold mb-2">
-                                            {promotions.length > 0 ? 'Todos os Produtos' : 'Nossos Produtos'}
+                                            {promotions.length > 0 ? 'Todos os Serviços' : 'Nossos Serviços'}
                                         </h2>
                                         <p className="catalog-muted font-medium">
-                                            <span className="catalog-count font-bold text-lg">{regularProducts.length}</span> {regularProducts.length === 1 ? 'produto disponível' : 'produtos disponíveis'}
+                                            <span className="catalog-count font-bold text-lg">{regularProducts.length}</span> {regularProducts.length === 1 ? 'serviço disponível' : 'serviços disponíveis'}
                                         </p>
                                     </div>
                                     {regularProducts.length > 8 && (
@@ -363,35 +363,35 @@ export default function ProductList() {
                 <div id="sobre" className="catalog-panel mt-16 rounded-2xl p-8 md:p-12">
                     <div className="max-w-4xl mx-auto">
                         <h2 className="catalog-heading text-3xl font-bold mb-6 text-center">
-                            Sobre Nós
+                            Por que escolher nosso atendimento ?
                         </h2>
 
                         <div className="mx-auto text-center">
                             <p className="catalog-muted text-lg leading-relaxed mb-4">
-                                Somos especialistas em mármore, granito e lâminas, oferecendo soluções sob medida para quem busca qualidade, resistência e um acabamento de alto padrão.
+                                Mais do que apresentar materiais, entregamos soluções completas em mármore, granito e lâminas para projetos residenciais, comerciais e corporativos que exigem acabamento de alto padrão.
                             </p>
 
                             <p className="catalog-muted text-lg leading-relaxed mb-6">
-                                Atuamos desde o corte até a instalação, garantindo um serviço completo com precisão e cuidado em cada detalhe. Nosso objetivo é entregar resultados que valorizam seu ambiente e trazem sofisticação para cada projeto.
+                                Cada atendimento começa no entendimento do seu projeto, passa pela orientação técnica e chega a uma execução precisa, com corte, acabamento e instalação pensados para valorizar o seu ambiente.
                             </p>
 
                             <div className="grid md:grid-cols-3 gap-6 mt-8">
                                 <div className="catalog-panel text-center p-6 rounded-xl">
                                     <div className="text-4xl mb-3">🪨</div>
-                                    <h3 className="catalog-heading font-bold mb-2">Alto Padrão</h3>
-                                    <p className="catalog-muted text-sm">Acabamento fino com materiais selecionados</p>
+                                    <h3 className="catalog-heading font-bold mb-2">Solução de Alto Padrão</h3>
+                                    <p className="catalog-muted text-sm">Acabamento sofisticado para cozinhas, banheiros, áreas gourmet e ambientes comerciais.</p>
                                 </div>
 
                                 <div className="catalog-panel text-center p-6 rounded-xl">
                                     <div className="text-4xl mb-3">📐</div>
-                                    <h3 className="catalog-heading font-bold mb-2">Sob Medida</h3>
-                                    <p className="catalog-muted text-sm">Projetos personalizados para cada cliente</p>
+                                    <h3 className="catalog-heading font-bold mb-2">Orçamento Consultivo</h3>
+                                    <p className="catalog-muted text-sm">Analisamos medidas, acabamento e necessidade da obra para indicar a melhor solução.</p>
                                 </div>
 
                                 <div className="catalog-panel text-center p-6 rounded-xl">
                                     <div className="text-4xl mb-3">⚡</div>
-                                    <h3 className="catalog-heading font-bold mb-2">Atendimento Rápido</h3>
-                                    <p className="catalog-muted text-sm">Contato direto e sem burocracia</p>
+                                    <h3 className="catalog-heading font-bold mb-2">Execução Completa</h3>
+                                    <p className="catalog-muted text-sm">Você fala com uma equipe que acompanha do primeiro contato até a entrega final.</p>
                                 </div>
                             </div>
                         </div>
