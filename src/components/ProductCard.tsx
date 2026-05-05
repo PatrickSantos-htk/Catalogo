@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import type { Product } from '../types'
-import { formatCurrency } from '../utils/format'
 
 interface ProductCardProps {
     product: Product
@@ -47,15 +46,9 @@ export default function ProductCard({ product }: ProductCardProps) {
                     {product.name}
                 </h3>
 
-                <p className="catalog-muted min-h-0 text-sm leading-relaxed sm:min-h-[2.75rem]">
-                    Atendimento consultivo e execução sob medida para o seu projeto.
-                </p>
-
-                <div className="flex items-center justify-between">
-                    <p className="catalog-price text-2xl font-extrabold sm:text-3xl">
-                        {formatCurrency(product.price)}
+                <p className="catalog-muted min-h-[3rem] text-sm leading-relaxed sm:min-h-[3.25rem]">
+                    Atendimento consultivo, definição de acabamento e execução sob medida para o seu projeto.
                     </p>
-                </div>
 
                 <span className="catalog-primary-button block w-full rounded-lg px-4 py-2.5 text-center text-sm font-semibold transition-all duration-300 transform group-hover:shadow-lg sm:text-base">
                     Ver Detalhes e Orçamento

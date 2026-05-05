@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { supabase } from '../../lib/supabase'
 import { toast } from 'react-toastify'
 import type { Product } from '../../types'
-import { formatCurrency, formatDate } from '../../utils/format'
+import { formatDate } from '../../utils/format'
 
 export default function AdminProducts() {
     const [products, setProducts] = useState<Product[]>([])
@@ -113,6 +113,9 @@ export default function AdminProducts() {
                     <p className="text-gray-600 dark:text-gray-400 mt-2">
                         {filteredProducts.length} {filteredProducts.length === 1 ? 'produto' : 'produtos'}
                     </p>
+                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                        Todos os itens do catálogo são atendidos somente por orçamento.
+                    </p>
                 </div>
                 <Link to="/admin/produtos/novo" className="btn-primary inline-flex w-full items-center justify-center sm:w-auto">
                     + Novo Produto
@@ -190,9 +193,6 @@ export default function AdminProducts() {
                                             <span className="rounded-full bg-blue-100 px-2.5 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
                                                 {product.category}
                                             </span>
-                                            <span className="text-sm font-semibold text-gray-900 dark:text-white">
-                                                {formatCurrency(product.price)}
-                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -229,9 +229,6 @@ export default function AdminProducts() {
                                         Categoria
                                     </th>
                                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                        Preço
-                                    </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
                                         Status
                                     </th>
                                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
@@ -261,9 +258,6 @@ export default function AdminProducts() {
                                             <span className="rounded bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
                                                 {product.category}
                                             </span>
-                                        </td>
-                                        <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
-                                            {formatCurrency(product.price)}
                                         </td>
                                         <td className="whitespace-nowrap px-6 py-4">
                                             <button

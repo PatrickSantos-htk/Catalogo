@@ -3,7 +3,6 @@ import { useParams, Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { toast } from 'react-toastify'
 import type { Product } from '../types'
-import { formatCurrency } from '../utils/format'
 import { generateWhatsAppLink, formatPhoneNumber } from '../utils/whatsapp'
 
 export default function ProductDetail() {
@@ -167,16 +166,16 @@ export default function ProductDetail() {
 
                             <div className="catalog-detail-price-row mt-6 sm:mt-8 py-5 sm:py-6 flex flex-col gap-3 sm:gap-4 sm:flex-row sm:items-end sm:justify-between">
                                 <div>
-                                    <p className="text-xs uppercase tracking-[0.28em] text-[#404040] mb-2">
-                                        Valor de Referência
+                                    <p className="mb-2 text-xs uppercase tracking-[0.28em] text-[#404040]">
+                                        Como Funciona
                                     </p>
-                                    <p className="catalog-price text-4xl sm:text-5xl font-extrabold leading-none sm:leading-tight">
-                                        {formatCurrency(product.price)}
+                                    <p className="catalog-heading text-xl sm:text-2xl font-extrabold leading-tight">
+                                        Atendimento sob medida para cada projeto
                                     </p>
                                 </div>
-                                <div className="catalog-pill inline-flex items-center self-start px-3 py-2 sm:px-4 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] sm:tracking-[0.2em] rounded-full sm:self-auto">
-                                    Solicite Seu Orçamento
-                                </div>
+                                <p className="catalog-muted max-w-md text-sm leading-relaxed sm:text-right">
+                                    Analisamos medidas, acabamento e contexto do ambiente para montar a proposta ideal no WhatsApp.
+                                </p>
                             </div>
 
                             <div className="mt-6 grid gap-3 sm:grid-cols-2">

@@ -21,7 +21,7 @@ export default function ProductForm() {
     // Form fields
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
-    const [price, setPrice] = useState('')
+    const [price, setPrice] = useState('0')
     const [category, setCategory] = useState('')
     const [whatsappNumber, setWhatsappNumber] = useState('')
     const [whatsappMessage, setWhatsappMessage] = useState('')
@@ -133,12 +133,6 @@ export default function ProductForm() {
             return false
         }
 
-        const priceNum = parseFloat(price)
-        if (isNaN(priceNum) || priceNum <= 0) {
-            toast.error('Preço deve ser maior que zero')
-            return false
-        }
-
         if (!category.trim()) {
             toast.error('Categoria é obrigatória')
             return false
@@ -212,7 +206,7 @@ export default function ProductForm() {
             const productData = {
                 name: name.trim(),
                 description: description.trim(),
-                price: parseFloat(price),
+                price: parseFloat(price || '0') || 0,
                 category: category.trim(),
                 stock: 1,
                 whatsapp_number: whatsappNumber.replace(/\D/g, ''),
@@ -294,34 +288,21 @@ export default function ProductForm() {
                             />
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                    Preço (R$) *
-                                </label>
-                                <input
-                                    type="number"
-                                    step="0.01"
-                                    min="0"
-                                    value={price}
-                                    onChange={(e) => setPrice(e.target.value)}
-                                    className="input"
-                                    required
-                                />
-                            </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Categoria *
+                            </label>
+                            <input
+                                type="text"
+                                value={category}
+                                onChange={(e) => setCategory(e.target.value)}
+                                className="input"
+                                required
+                            />
+                        </div>
 
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                    Categoria *
-                                </label>
-                                <input
-                                    type="text"
-                                    value={category}
-                                    onChange={(e) => setCategory(e.target.value)}
-                                    className="input"
-                                    required
-                                />
-                            </div>
+                        <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-900/40 dark:bg-amber-950/30 dark:text-amber-200">
+                            Este catálogo trabalha apenas com solicitação de orçamento. O valor público não é exibido para o cliente.
                         </div>
 
                         <div className="flex items-center">
