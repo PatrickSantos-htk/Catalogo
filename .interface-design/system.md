@@ -34,6 +34,13 @@
 - Hero glass panels: blur + borda translúcida + sombra mais profunda
 - Rule: superfícies claras ficam em camadas leves; o hero usa profundidade mais forte e atmosfera escura
 
+## Extract Snapshot
+- Spacing observed: base de 4px com uso recorrente de 12, 16, 20, 24, 28, 32, 40 e 48 para separar blocos comerciais, cards e seções.
+- Radius observed: 8 a 12 para badges e controles, 16 a 24 para cards internos e 28 a 32 para hero, seções de destaque e cartões principais.
+- Surface and depth: vitrine trabalha com painéis claros em degradê branco/ivory, borda sutil e sombra macia; hero e vídeos usam contraste escuro e profundidade mais forte.
+- Palette roles: preto para hierarquia e CTA, carvão para texto secundário, prata para linhas/soft highlights, branco e ivory para superfícies, verde reservado à conversão.
+- Repeated patterns: botão primário com gradiente escuro, card image-first com badges sobrepostos, filtros compactos em painel claro, cartões de vídeo com frame escuro e meta clara.
+
 ## Typography
 - Headings: peso alto, contraste forte, escala ampla em hero e detalhe
 - Body: neutro, legível e com ritmo confortável
@@ -56,8 +63,8 @@
 ### Card de Produto
 - Superfície: fundo claro em degradê suave
 - Imagem: quadrada, dominante e com zoom leve no hover
-- Conteúdo: categoria visível, nome forte, oferta de serviço clara, preço ou chamada de orçamento, CTA simples
-- Comportamento: leve elevação no hover, sem excesso de animação
+- Conteúdo: badge de categoria sobre a imagem, kicker curto, nome em duas linhas, descrição curta, painel comercial com “valor inicial” ou “sob orçamento” e CTA de largura total
+- Comportamento: leve elevação no hover, zoom controlado da imagem e base comercial sempre alinhada ao rodapé do card
 
 ### Filtros do Catálogo
 - Estrutura: barra compacta em painel claro
@@ -71,7 +78,7 @@
 
 ### Logica Comercial
 - Tratar a interface como e-commerce de serviços: a vitrine vende capacidade, qualidade, execução e confiança.
-- O preço pode existir, mas o principal gatilho comercial é orçamento e conversa consultiva.
+- Cada item escolhe entre dois modos: `quote` para foco total em orçamento, ou `starting_price` para mostrar um valor inicial sem perder o CTA consultivo.
 - A navegação deve ajudar o usuário a sair da dúvida e chegar ao contato.
 
 ### Botao Primario da Vitrine

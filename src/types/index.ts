@@ -1,8 +1,11 @@
+export type PricingMode = 'quote' | 'starting_price'
+
 export interface Product {
     id: string
     name: string
     description: string
     price: number
+    pricing_mode: PricingMode
     category: string
     stock: number
     images: string[]

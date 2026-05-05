@@ -125,7 +125,7 @@ export default function ProductList() {
                 <div className="catalog-hero-brand">
                     <div className="catalog-brand-logo rounded-2xl">
                         <img
-                            src="/banner%20leo.jpeg"
+                            src="/rei.jpeg"
                             alt="Logo da marca"
                             className="catalog-brand-logo-image"
                         />

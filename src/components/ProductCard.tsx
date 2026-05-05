@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { Product } from '../types'
+import { formatCurrency } from '../utils/format'
 
 interface ProductCardProps {
     product: Product
@@ -7,12 +8,13 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
     const firstImage = product.images[0] || '/placeholder-product.png'
+    const showsStartingPrice = product.pricing_mode === 'starting_price' && product.price > 0
 
     return (
         <Link
             to={`/produto/${product.id}`}
             aria-label={`Ver detalhes do serviço ${product.name}`}
-            className="group catalog-card h-full overflow-hidden rounded-[1.4rem] transition-all duration-300 transform hover:-translate-y-1 sm:rounded-[1.75rem]"
+            className="group catalog-card flex h-full flex-col overflow-hidden rounded-[1.4rem] transition-all duration-300 transform hover:-translate-y-1 sm:rounded-[1.75rem]"
         >
             <div className="catalog-card-image aspect-square overflow-hidden relative">
                 <img
@@ -21,6 +23,8 @@ export default function ProductCard({ product }: ProductCardProps) {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     loading="lazy"
                 />
+
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/35 via-black/10 to-transparent" />
 
                 {/* Promotion Badge */}
                 {product.is_promotion && (
@@ -41,18 +45,37 @@ export default function ProductCard({ product }: ProductCardProps) {
                 </div>
             </div>
 
-            <div className="space-y-3 p-4 sm:p-5">
-                <h3 className="catalog-heading min-h-[3rem] line-clamp-2 text-base font-bold sm:min-h-[3.5rem] sm:text-lg">
-                    {product.name}
-                </h3>
-
-                <p className="catalog-muted min-h-[3rem] text-sm leading-relaxed sm:min-h-[3.25rem]">
-                    Atendimento consultivo, definição de acabamento e execução sob medida para o seu projeto.
+            <div className="flex flex-1 flex-col p-4 sm:p-5">
+                <div className="space-y-3">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#404040]">
+                        Projeto sob medida
                     </p>
 
-                <span className="catalog-primary-button block w-full rounded-lg px-4 py-2.5 text-center text-sm font-semibold transition-all duration-300 transform group-hover:shadow-lg sm:text-base">
+                    <h3 className="catalog-heading min-h-[3rem] line-clamp-2 text-base font-bold sm:min-h-[3.5rem] sm:text-lg">
+                        {product.name}
+                    </h3>
+
+                    <p className="catalog-muted min-h-[3rem] text-sm leading-relaxed sm:min-h-[3.25rem]">
+                        Atendimento consultivo, definição de acabamento e execução sob medida para o seu projeto.
+                    </p>
+                </div>
+
+                <div className="mt-auto space-y-3 pt-4">
+                    {showsStartingPrice && (
+                        <div className="rounded-[1rem] border border-[#0d0d0d]/8 bg-[#0d0d0d]/[0.03] px-3 py-3">
+                            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#404040]">
+                                Valor inicial
+                            </p>
+                            <p className="catalog-price mt-1 text-2xl font-extrabold leading-tight sm:text-[1.75rem]">
+                                {formatCurrency(product.price)}
+                            </p>
+                        </div>
+                    )}
+
+                    <span className="catalog-primary-button block w-full rounded-lg px-4 py-2.5 text-center text-sm font-semibold transition-all duration-300 transform group-hover:shadow-lg sm:text-base">
                     Ver Detalhes e Orçamento
-                </span>
+                    </span>
+                </div>
             </div>
         </Link>
     )

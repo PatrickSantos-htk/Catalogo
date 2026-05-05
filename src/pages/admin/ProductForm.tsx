@@ -2,7 +2,7 @@ import { useState, useEffect, FormEvent } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { supabase } from '../../lib/supabase'
 import { toast } from 'react-toastify'
-import type { Product } from '../../types'
+import type { PricingMode, Product } from '../../types'
 import { isValidWhatsAppNumber } from '../../utils/whatsapp'
 
 interface SpecificationField {
@@ -22,6 +22,7 @@ export default function ProductForm() {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('0')
+    const [pricingMode, setPricingMode] = useState<PricingMode>('quote')
     const [category, setCategory] = useState('')
     const [whatsappNumber, setWhatsappNumber] = useState('')
     const [whatsappMessage, setWhatsappMessage] = useState('')
@@ -60,6 +61,7 @@ export default function ProductForm() {
             setName(data.name)
             setDescription(data.description)
             setPrice(data.price.toString())
+            setPricingMode(data.pricing_mode || 'quote')
             setCategory(data.category)
             setWhatsappNumber(data.whatsapp_number)
             setWhatsappMessage(data.whatsapp_message || '')
@@ -138,6 +140,14 @@ export default function ProductForm() {
             return false
         }
 
+        if (pricingMode === 'starting_price') {
+            const priceNum = parseFloat(price)
+            if (isNaN(priceNum) || priceNum <= 0) {
+                toast.error('Informe um valor inicial maior que zero')
+                return false
+            }
+        }
+
         if (!whatsappNumber.trim()) {
             toast.error('Número do WhatsApp é obrigatório')
             return false
@@ -206,7 +216,8 @@ export default function ProductForm() {
             const productData = {
                 name: name.trim(),
                 description: description.trim(),
-                price: parseFloat(price || '0') || 0,
+                price: pricingMode === 'starting_price' ? parseFloat(price || '0') || 0 : 0,
+                pricing_mode: pricingMode,
                 category: category.trim(),
                 stock: 1,
                 whatsapp_number: whatsappNumber.replace(/\D/g, ''),
@@ -301,8 +312,70 @@ export default function ProductForm() {
                             />
                         </div>
 
-                        <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-900/40 dark:bg-amber-950/30 dark:text-amber-200">
-                            Este catálogo trabalha apenas com solicitação de orçamento. O valor público não é exibido para o cliente.
+                        <div className="space-y-3 rounded-2xl border border-gray-200 bg-gray-50 px-4 py-4 dark:border-gray-700 dark:bg-gray-900/40">
+                            <div>
+                                <p className="text-sm font-medium text-gray-700 dark:text-gray-200">
+                                    Forma de exibição comercial
+                                </p>
+                                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                    Escolha se o item será exibido com valor inicial ou somente por orçamento.
+                                </p>
+                            </div>
+
+                            <div className="grid gap-3 sm:grid-cols-2">
+                                <button
+                                    type="button"
+                                    onClick={() => setPricingMode('quote')}
+                                    className={`rounded-xl border px-4 py-3 text-left transition-colors ${pricingMode === 'quote'
+                                        ? 'border-gray-900 bg-gray-900 text-white dark:border-gray-100 dark:bg-gray-100 dark:text-gray-900'
+                                        : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300'
+                                        }`}
+                                >
+                                    <p className="text-sm font-semibold">Somente orçamento</p>
+                                    <p className={`mt-1 text-xs ${pricingMode === 'quote' ? 'text-gray-200 dark:text-gray-700' : 'text-gray-500 dark:text-gray-400'}`}>
+                                        O card e o detalhe não exibem valor, só o CTA de orçamento.
+                                    </p>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    onClick={() => setPricingMode('starting_price')}
+                                    className={`rounded-xl border px-4 py-3 text-left transition-colors ${pricingMode === 'starting_price'
+                                        ? 'border-gray-900 bg-gray-900 text-white dark:border-gray-100 dark:bg-gray-100 dark:text-gray-900'
+                                        : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300'
+                                        }`}
+                                >
+                                    <p className="text-sm font-semibold">Exibir valor inicial</p>
+                                    <p className={`mt-1 text-xs ${pricingMode === 'starting_price' ? 'text-gray-200 dark:text-gray-700' : 'text-gray-500 dark:text-gray-400'}`}>
+                                        O público vê “a partir de” com o valor informado no card e no detalhe.
+                                    </p>
+                                </button>
+                            </div>
+
+                            {pricingMode === 'starting_price' ? (
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Valor inicial (R$) *
+                                    </label>
+                                    <input
+                                        type="number"
+                                        step="0.01"
+                                        min="0"
+                                        value={price}
+                                        onChange={(e) => setPrice(e.target.value)}
+                                        className="input"
+                                        placeholder="Ex: 350.00"
+                                        required
+                                    />
+                                    <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                                        Use o menor valor que faça sentido como ponto de partida comercial.
+                                    </p>
+                                </div>
+                            ) : (
+                                <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-900/40 dark:bg-amber-950/30 dark:text-amber-200">
+                                    Este item ficará com foco em contato e orçamento, sem exibir valor público.
+                                </div>
+                            )}
                         </div>
 
                         <div className="flex items-center">

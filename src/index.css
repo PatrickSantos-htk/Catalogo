@@ -68,7 +68,7 @@ body {
     position: relative;
     background:
         linear-gradient(90deg, rgba(13, 13, 13, 0.92) 0%, rgba(13, 13, 13, 0.72) 45%, rgba(13, 13, 13, 0.82) 100%),
-        url('/banner%20leo.jpeg') center/cover no-repeat;
+    url('/rei.jpeg') center/cover no-repeat;
 }
 
 .catalog-hero-grid {

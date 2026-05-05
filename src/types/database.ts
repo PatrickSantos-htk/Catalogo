@@ -8,6 +8,8 @@ export type Json =
     | { [key: string]: Json | undefined }
     | Json[]
 
+export type PricingMode = 'quote' | 'starting_price'
+
 export interface Database {
     public: {
         Tables: {
@@ -17,6 +19,7 @@ export interface Database {
                     name: string
                     description: string
                     price: number
+                    pricing_mode: PricingMode
                     category: string
                     stock: number
                     images: string[]
@@ -33,6 +36,7 @@ export interface Database {
                     name: string
                     description: string
                     price: number
+                    pricing_mode?: PricingMode
                     category: string
                     stock?: number
                     images?: string[]
@@ -49,6 +53,7 @@ export interface Database {
                     name?: string
                     description?: string
                     price?: number
+                    pricing_mode?: PricingMode
                     category?: string
                     stock?: number
                     images?: string[]

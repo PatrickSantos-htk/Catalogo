@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { supabase } from '../../lib/supabase'
 import { toast } from 'react-toastify'
 import type { Product } from '../../types'
-import { formatDate } from '../../utils/format'
+import { formatCurrency, formatDate } from '../../utils/format'
 
 export default function AdminProducts() {
     const [products, setProducts] = useState<Product[]>([])
@@ -95,6 +95,14 @@ export default function AdminProducts() {
         return matchesSearch && matchesStatus
     })
 
+    const getPricingText = (product: Product) => {
+        if (product.pricing_mode === 'starting_price' && product.price > 0) {
+            return `A partir de ${formatCurrency(product.price)}`
+        }
+
+        return 'Sob orçamento'
+    }
+
     if (isLoading) {
         return (
             <div className="flex items-center justify-center py-12">
@@ -114,7 +122,7 @@ export default function AdminProducts() {
                         {filteredProducts.length} {filteredProducts.length === 1 ? 'produto' : 'produtos'}
                     </p>
                     <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                        Todos os itens do catálogo são atendidos somente por orçamento.
+                        Cada item pode ser exibido com valor inicial ou somente por orçamento.
                     </p>
                 </div>
                 <Link to="/admin/produtos/novo" className="btn-primary inline-flex w-full items-center justify-center sm:w-auto">
@@ -193,6 +201,12 @@ export default function AdminProducts() {
                                             <span className="rounded-full bg-blue-100 px-2.5 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
                                                 {product.category}
                                             </span>
+                                            <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${product.pricing_mode === 'starting_price'
+                                                ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300'
+                                                : 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300'
+                                                }`}>
+                                                {getPricingText(product)}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -229,6 +243,9 @@ export default function AdminProducts() {
                                         Categoria
                                     </th>
                                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                        Comercial
+                                    </th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
                                         Status
                                     </th>
                                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
@@ -258,6 +275,9 @@ export default function AdminProducts() {
                                             <span className="rounded bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
                                                 {product.category}
                                             </span>
+                                        </td>
+                                        <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                                            {getPricingText(product)}
                                         </td>
                                         <td className="whitespace-nowrap px-6 py-4">
                                             <button
