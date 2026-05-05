@@ -127,9 +127,9 @@ export default function ProductList() {
 
                             <div className="mt-8 flex flex-wrap gap-4">
                                 <a href="#produtos" className="catalog-primary-button inline-flex items-center rounded-xl px-6 py-3 font-semibold transition-all">
-                                    Ver serviços
+                                    Ver Serviços
                                 </a>
-                                <a href="https://wa.me/5521973675618" target="_blank" className="catalog-hero-link inline-flex items-center rounded-xl border border-white/20 px-6 py-3 font-semibold transition-all hover:bg-white/10">
+                                <a href="https://wa.me/5521973675618" target="_blank" rel="noopener noreferrer" className="catalog-hero-link inline-flex items-center rounded-xl border border-white/20 px-6 py-3 font-semibold transition-all hover:bg-white/10">
                                     Solicitar orçamento
                                 </a>
                                 <a
@@ -180,9 +180,9 @@ export default function ProductList() {
                 </div>
             </header>
 
-            <div id="produtos" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <main id="produtos" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 {/* Filters - Compacto */}
-                <div className="catalog-panel mb-8 rounded-[1.5rem] p-4">
+                <section aria-label="Filtros de busca" className="catalog-panel mb-8 rounded-[1.5rem] p-4">
                     <div className="flex flex-col sm:flex-row gap-3">
                         <div className="flex-1">
                             <input
@@ -209,7 +209,7 @@ export default function ProductList() {
                             </select>
                         </div>
                     </div>
-                </div>
+                </section>
 
                 {/* Products Grid */}
                 {filteredProducts.length === 0 ? (
@@ -232,17 +232,17 @@ export default function ProductList() {
                     <>
                         {/* Promotions Section */}
                         {promotions.length > 0 && (
-                            <div className="mb-12">
+                            <section aria-labelledby="promocoes-heading" className="mb-12">
                                 <div className="relative mb-6">
                                     <div className="absolute inset-0 flex items-center">
                                         <div className="w-full border-t border-[#404040]/20"></div>
                                     </div>
                                     <div className="relative flex justify-center">
-                                        <span className="catalog-promo-banner px-8 py-3 rounded-full shadow-xl">
-                                            <span className="text-2xl font-extrabold text-white flex items-center">
+                                        <div className="catalog-promo-banner px-8 py-3 rounded-full shadow-xl">
+                                            <h2 id="promocoes-heading" className="text-2xl font-extrabold text-white flex items-center">
                                                 🔥 PROMOÇÕES EM DESTAQUE 🔥
-                                            </span>
-                                        </span>
+                                            </h2>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -285,15 +285,15 @@ export default function ProductList() {
                                         </div>
                                     )}
                                 </div>
-                            </div>
+                            </section>
                         )}
 
                         {/* Regular Products Section */}
                         {regularProducts.length > 0 && (
-                            <>
+                            <section aria-labelledby="servicos-heading">
                                 <div className="mb-6 flex items-center justify-between">
                                     <div>
-                                        <h2 className="catalog-heading text-2xl font-bold mb-2">
+                                        <h2 id="servicos-heading" className="catalog-heading text-2xl font-bold mb-2">
                                             {promotions.length > 0 ? 'Todos os Serviços' : 'Nossos Serviços'}
                                         </h2>
                                         <p className="catalog-muted font-medium">
@@ -354,16 +354,16 @@ export default function ProductList() {
                                         ))}
                                     </div>
                                 )}
-                            </>
+                            </section>
                         )}
                     </>
                 )}
 
                 {/* Sobre Nós Section */}
-                <div id="sobre" className="catalog-panel mt-16 rounded-2xl p-8 md:p-12">
+                <section id="sobre" aria-labelledby="sobre-heading" className="catalog-panel mt-16 rounded-2xl p-8 md:p-12">
                     <div className="max-w-4xl mx-auto">
-                        <h2 className="catalog-heading text-3xl font-bold mb-6 text-center">
-                            Por que escolher nosso atendimento ?
+                        <h2 id="sobre-heading" className="catalog-heading text-3xl font-bold mb-6 text-center">
+                            Por Que Escolher Nosso Atendimento
                         </h2>
 
                         <div className="mx-auto text-center">
@@ -396,14 +396,14 @@ export default function ProductList() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
                 <footer className="mt-16 text-center pb-8">
                     <p className="catalog-muted">
                         © 2026 - Mármore e Granito | Todos os direitos reservados
                     </p>
                 </footer>
-            </div>
+            </main>
         </div>
     )
 }

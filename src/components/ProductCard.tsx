@@ -12,6 +12,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     return (
         <Link
             to={`/produto/${product.id}`}
+            aria-label={`Ver detalhes do serviço ${product.name}`}
             className="group catalog-card rounded-[1.75rem] transition-all duration-300 overflow-hidden transform hover:-translate-y-1"
         >
             <div className="catalog-card-image aspect-square overflow-hidden relative">
@@ -47,7 +48,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 </h3>
 
                 <p className="catalog-muted text-sm leading-relaxed min-h-[2.75rem]">
-                    Atendimento consultivo e execucao sob medida para o seu projeto.
+                    Atendimento consultivo e execução sob medida para o seu projeto.
                 </p>
 
                 <div className="flex items-center justify-between">
@@ -56,9 +57,9 @@ export default function ProductCard({ product }: ProductCardProps) {
                     </p>
                 </div>
 
-                <button className="catalog-primary-button w-full font-semibold py-2.5 px-4 rounded-lg transition-all duration-300 transform group-hover:shadow-lg">
-                    Ver detalhes e orcamento
-                </button>
+                <span className="catalog-primary-button block w-full text-center font-semibold py-2.5 px-4 rounded-lg transition-all duration-300 transform group-hover:shadow-lg">
+                    Ver Detalhes e Orçamento
+                </span>
             </div>
         </Link>
     )
