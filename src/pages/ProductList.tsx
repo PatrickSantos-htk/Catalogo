@@ -87,86 +87,86 @@ export default function ProductList() {
         )
     }
 
-    return (
-        <div className="catalog-shell min-h-screen">
-            {/* Header */}
-            <header className="catalog-hero shadow-xl">
-                <div className="catalog-hero-brand">
-                    <div className="catalog-brand-logo rounded-2xl">
-                        <img
-                            src="/banner%20leo.jpeg"
-                            alt="Logo da marca"
-                            className="catalog-brand-logo-image"
-                        />
-                    </div>
+   return (
+    <div className="catalog-shell min-h-screen">
+        {/* Header */}
+        <header className="catalog-hero shadow-xl">
+            <div className="catalog-hero-brand">
+                <div className="catalog-brand-logo rounded-2xl">
+                    <img
+                        src="/banner%20leo.jpeg"
+                        alt="Logo da marca"
+                        className="catalog-brand-logo-image"
+                    />
                 </div>
+            </div>
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-10 lg:pt-32 lg:pb-14">
-                    <div className="catalog-hero-grid">
-                        <div className="catalog-brand-card rounded-[2rem] p-6 sm:p-8 lg:p-10 text-white overflow-hidden">
-                            <div className="flex flex-wrap items-center gap-3 mb-6">
-                                <span className="catalog-hero-pill inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em]">
-                                    vitrine digital
-                                </span>
-                                <span className="catalog-hero-pill inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em]">
-                                    atendimento via WhatsApp
-                                </span>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-10 lg:pt-32 lg:pb-14">
+                <div className="catalog-hero-grid">
+                    <div className="catalog-brand-card rounded-[2rem] p-6 sm:p-8 lg:p-10 text-white overflow-hidden">
+                        <div className="flex flex-wrap items-center gap-3 mb-6">
+                            <span className="catalog-hero-pill inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em]">
+                                alto padrão
+                            </span>
+                            <span className="catalog-hero-pill inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em]">
+                                atendimento via WhatsApp
+                            </span>
+                        </div>
+
+                        <div>
+                            <p className="text-sm uppercase tracking-[0.32em] text-[#d9d9d9] mb-2">
+                                mármore e granito
+                            </p>
+                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[0.98] mb-4">
+                                Acabamentos em mármore e granito com qualidade profissional e alto padrão.
+                            </h1>
+                            <p className="text-base sm:text-lg text-[#d9d9d9] max-w-2xl leading-relaxed">
+                                Trabalhamos com cortes sob medida, instalação especializada e materiais selecionados para garantir um acabamento impecável em cada projeto.
+                            </p>
+                        </div>
+
+                        <div className="mt-8 flex flex-wrap gap-4">
+                            <a href="#produtos" className="catalog-primary-button inline-flex items-center rounded-xl px-6 py-3 font-semibold transition-all">
+                                Ver produtos
+                            </a>
+                            <a href="https://wa.me/5521973675618" target="_blank" className="catalog-hero-link inline-flex items-center rounded-xl border border-white/20 px-6 py-3 font-semibold transition-all hover:bg-white/10">
+                                Solicitar orçamento
+                            </a>
+                        </div>
+                    </div>
+
+                    <div className="grid gap-4 self-stretch">
+                        <div className="catalog-hero-stat rounded-[1.75rem] p-6 text-white">
+                            <p className="text-xs uppercase tracking-[0.28em] text-[#d9d9d9] mb-3">especialistas</p>
+                            <h2 className="text-2xl font-bold mb-2">Precisão em cada detalhe</h2>
+                            <p className="text-sm leading-relaxed text-[#d9d9d9]">
+                                Profissionais experientes em corte, acabamento e instalação de mármores, granitos e lâminas, garantindo qualidade e durabilidade.
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="catalog-hero-stat rounded-[1.5rem] p-5 text-white">
+                                <p className="text-3xl font-extrabold">Rápido</p>
+                                <p className="mt-2 text-sm text-[#d9d9d9]">atendimento direto e sem enrolação</p>
                             </div>
-
-                            <div>
-                                <p className="text-sm uppercase tracking-[0.32em] text-[#d9d9d9] mb-2">
-                                    identidade da marca
-                                </p>
-                                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[0.98] mb-4">
-                                    Um cabeçalho forte para apresentar sua marca e seus produtos.
-                                </h1>
-                                <p className="text-base sm:text-lg text-[#d9d9d9] max-w-2xl leading-relaxed">
-                                    A imagem principal do hero agora usa o arquivo logo.jpeg como fundo do cabeçalho, com sobreposição escura para manter a leitura do conteúdo.
-                                </p>
-                            </div>
-
-                            <div className="mt-8 flex flex-wrap gap-4">
-                                <a href="#produtos" className="catalog-primary-button inline-flex items-center rounded-xl px-6 py-3 font-semibold transition-all">
-                                    Ver produtos
-                                </a>
-                                <a href="#sobre" className="catalog-hero-link inline-flex items-center rounded-xl border border-white/20 px-6 py-3 font-semibold transition-all hover:bg-white/10">
-                                    Conheça a empresa
-                                </a>
+                            <div className="catalog-hero-stat rounded-[1.5rem] p-5 text-white">
+                                <p className="text-3xl font-extrabold">Qualidade</p>
+                                <p className="mt-2 text-sm text-[#d9d9d9]">acabamento de alto padrão</p>
                             </div>
                         </div>
 
-                        <div className="grid gap-4 self-stretch">
-                            <div className="catalog-hero-stat rounded-[1.75rem] p-6 text-white">
-                                <p className="text-xs uppercase tracking-[0.28em] text-[#d9d9d9] mb-3">apresentação da marca</p>
-                                <h2 className="text-2xl font-bold mb-2">Logo no fundo, mensagem na frente.</h2>
-                                <p className="text-sm leading-relaxed text-[#d9d9d9]">
-                                    O cabeçalho agora usa diretamente o arquivo público /logo.jpeg como imagem principal do hero.
-                                </p>
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="catalog-hero-stat rounded-[1.5rem] p-5 text-white">
-                                    <p className="text-3xl font-extrabold">24h</p>
-                                    <p className="mt-2 text-sm text-[#d9d9d9]">atendimento rápido e direto</p>
-                                </div>
-                                <div className="catalog-hero-stat rounded-[1.5rem] p-5 text-white">
-                                    <p className="text-3xl font-extrabold">100%</p>
-                                    <p className="mt-2 text-sm text-[#d9d9d9]">catálogo organizado para venda</p>
-                                </div>
-                            </div>
-
-                            <div className="catalog-hero-stat rounded-[1.75rem] p-6 text-white">
-                                <p className="text-xs uppercase tracking-[0.28em] text-[#d9d9d9] mb-3">estrutura do hero</p>
-                                <ul className="space-y-3 text-sm text-[#d9d9d9]">
-                                    <li>Imagem de fundo para reforçar identidade visual</li>
-                                    <li>Bloco principal com marca e chamada</li>
-                                    <li>Botões de navegação para catálogo e sobre</li>
-                                </ul>
-                            </div>
+                        <div className="catalog-hero-stat rounded-[1.75rem] p-6 text-white">
+                            <p className="text-xs uppercase tracking-[0.28em] text-[#d9d9d9] mb-3">diferencial</p>
+                            <ul className="space-y-3 text-sm text-[#d9d9d9]">
+                                <li>Cortes sob medida para qualquer projeto</li>
+                                <li>Instalação profissional e segura</li>
+                                <li>Parceria com profissionais e obras</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </header>
+            </div>
+        </header>
 
             <div id="produtos" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 {/* Filters - Compacto */}
