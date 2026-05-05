@@ -2,6 +2,11 @@
 
 Sistema completo de catálogo de produtos com painel administrativo. Clientes podem visualizar produtos e entrar em contato via WhatsApp. Administradores gerenciam o catálogo através de um painel protegido.
 
+## 📚 Documentação Adicional
+
+- [docs/README.md](docs/README.md) - Índice da documentação complementar do projeto
+- [docs/COPILOT_PROMPTS.md](docs/COPILOT_PROMPTS.md) - Guia dos prompts de interface design usados com GitHub Copilot no VS Code
+
 ## 🚀 Tecnologias
 
 - **Frontend**: React 18 + TypeScript + Vite
