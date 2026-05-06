@@ -1,7 +1,7 @@
-import { useState, useEffect, FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { supabase } from '../../lib/supabase'
 import { toast } from 'react-toastify'
+import { supabase } from '../../lib/supabase'
 import type { PricingMode, Product } from '../../types'
 import { isValidWhatsAppNumber } from '../../utils/whatsapp'
 
@@ -18,7 +18,6 @@ export default function ProductForm() {
     const [isLoading, setIsLoading] = useState(false)
     const [isFetchingProduct, setIsFetchingProduct] = useState(isEditing)
 
-    // Form fields
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('0')
@@ -29,14 +28,12 @@ export default function ProductForm() {
     const [active, setActive] = useState(true)
     const [isPromotion, setIsPromotion] = useState(false)
 
-    // Images
     const [existingImages, setExistingImages] = useState<string[]>([])
     const [newImageFiles, setNewImageFiles] = useState<File[]>([])
     const [imagePreviews, setImagePreviews] = useState<string[]>([])
 
-    // Specifications
     const [specifications, setSpecifications] = useState<SpecificationField[]>([
-        { key: '', value: '' }
+        { key: '', value: '' },
     ])
 
     useEffect(() => {
@@ -56,7 +53,7 @@ export default function ProductForm() {
             )
 
             if (error) throw error
-            if (!data) throw new Error('Produto não encontrado')
+            if (!data) throw new Error('Produto nao encontrado')
 
             setName(data.name)
             setDescription(data.description)
@@ -69,12 +66,12 @@ export default function ProductForm() {
             setIsPromotion(data.is_promotion || false)
             setExistingImages(data.images || [])
 
-            // Convert specifications object to array
             if (data.specifications && typeof data.specifications === 'object') {
                 const specsArray = Object.entries(data.specifications).map(([key, value]) => ({
                     key,
                     value: String(value),
                 }))
+
                 setSpecifications(specsArray.length > 0 ? specsArray : [{ key: '', value: '' }])
             }
         } catch (error: any) {
@@ -85,27 +82,26 @@ export default function ProductForm() {
         }
     }
 
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = Array.from(e.target.files || [])
-        setNewImageFiles(prev => [...prev, ...files])
+    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const files = Array.from(event.target.files || [])
+        setNewImageFiles((previous) => [...previous, ...files])
 
-        // Create previews
-        files.forEach(file => {
+        files.forEach((file) => {
             const reader = new FileReader()
             reader.onloadend = () => {
-                setImagePreviews(prev => [...prev, reader.result as string])
+                setImagePreviews((previous) => [...previous, reader.result as string])
             }
             reader.readAsDataURL(file)
         })
     }
 
     const removeExistingImage = (index: number) => {
-        setExistingImages(prev => prev.filter((_, i) => i !== index))
+        setExistingImages((previous) => previous.filter((_, imageIndex) => imageIndex !== index))
     }
 
     const removeNewImage = (index: number) => {
-        setNewImageFiles(prev => prev.filter((_, i) => i !== index))
-        setImagePreviews(prev => prev.filter((_, i) => i !== index))
+        setNewImageFiles((previous) => previous.filter((_, imageIndex) => imageIndex !== index))
+        setImagePreviews((previous) => previous.filter((_, imageIndex) => imageIndex !== index))
     }
 
     const addSpecification = () => {
@@ -114,7 +110,7 @@ export default function ProductForm() {
 
     const removeSpecification = (index: number) => {
         if (specifications.length > 1) {
-            setSpecifications(specifications.filter((_, i) => i !== index))
+            setSpecifications(specifications.filter((_, specificationIndex) => specificationIndex !== index))
         }
     }
 
@@ -126,35 +122,36 @@ export default function ProductForm() {
 
     const validateForm = (): boolean => {
         if (!name.trim()) {
-            toast.error('Nome do produto é obrigatório')
+            toast.error('Nome do produto e obrigatorio')
             return false
         }
 
         if (!description.trim()) {
-            toast.error('Descrição é obrigatória')
+            toast.error('Descricao e obrigatoria')
             return false
         }
 
         if (!category.trim()) {
-            toast.error('Categoria é obrigatória')
+            toast.error('Categoria e obrigatoria')
             return false
         }
 
         if (pricingMode === 'starting_price') {
-            const priceNum = parseFloat(price)
-            if (isNaN(priceNum) || priceNum <= 0) {
+            const priceNumber = parseFloat(price)
+
+            if (isNaN(priceNumber) || priceNumber <= 0) {
                 toast.error('Informe um valor inicial maior que zero')
                 return false
             }
         }
 
         if (!whatsappNumber.trim()) {
-            toast.error('Número do WhatsApp é obrigatório')
+            toast.error('Numero do WhatsApp e obrigatorio')
             return false
         }
 
         if (!isValidWhatsAppNumber(whatsappNumber)) {
-            toast.error('Número do WhatsApp inválido. Use o formato: (XX) 9XXXX-XXXX')
+            toast.error('Numero do WhatsApp invalido. Use o formato: (XX) 9XXXX-XXXX')
             return false
         }
 
@@ -170,8 +167,8 @@ export default function ProductForm() {
         const uploadedUrls: string[] = []
 
         for (const file of newImageFiles) {
-            const fileExt = file.name.split('.').pop()
-            const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`
+            const fileExtension = file.name.split('.').pop()
+            const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExtension}`
 
             const { data, error } = await supabase.storage
                 .from('product-images')
@@ -179,7 +176,9 @@ export default function ProductForm() {
 
             if (error) throw error
 
-            const { data: { publicUrl } } = supabase.storage
+            const {
+                data: { publicUrl },
+            } = supabase.storage
                 .from('product-images')
                 .getPublicUrl(data.path)
 
@@ -189,15 +188,14 @@ export default function ProductForm() {
         return uploadedUrls
     }
 
-    const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault()
+    const handleSubmit = async (event: FormEvent) => {
+        event.preventDefault()
 
         if (!validateForm()) return
 
         setIsLoading(true)
 
         try {
-            // Upload new images
             const newImageUrls = await uploadImages()
             const allImages = [...existingImages, ...newImageUrls]
             const productsTable = supabase.from('products' as never) as unknown as {
@@ -205,11 +203,10 @@ export default function ProductForm() {
                 insert: (payload: unknown) => Promise<{ error: Error | null }>
             }
 
-            // Convert specifications array to object
-            const specsObject: Record<string, any> = {}
-            specifications.forEach(spec => {
-                if (spec.key.trim() && spec.value.trim()) {
-                    specsObject[spec.key.trim()] = spec.value.trim()
+            const specificationsObject: Record<string, any> = {}
+            specifications.forEach((specification) => {
+                if (specification.key.trim() && specification.value.trim()) {
+                    specificationsObject[specification.key.trim()] = specification.value.trim()
                 }
             })
 
@@ -223,7 +220,7 @@ export default function ProductForm() {
                 whatsapp_number: whatsappNumber.replace(/\D/g, ''),
                 whatsapp_message: whatsappMessage.trim() || null,
                 images: allImages,
-                specifications: specsObject,
+                specifications: specificationsObject,
                 active,
                 is_promotion: isPromotion,
             }
@@ -252,73 +249,100 @@ export default function ProductForm() {
     if (isFetchingProduct) {
         return (
             <div className="flex items-center justify-center py-12">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-blue-600"></div>
             </div>
         )
     }
 
     return (
-        <div className="mx-auto w-full max-w-4xl">
-            <div className="mb-6">
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl">
-                    {isEditing ? 'Editar Produto' : 'Novo Produto'}
-                </h1>
-            </div>
+        <div className="mx-auto w-full max-w-5xl space-y-6 lg:space-y-8">
+            <section className="admin-panel p-6 sm:p-8">
+                <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px] xl:items-end">
+                    <div>
+                        <p className="admin-kicker">Cadastro comercial</p>
+                        <h1 className="mt-2 text-3xl font-semibold text-[color:var(--admin-obsidian)] sm:text-4xl">
+                            {isEditing
+                                ? 'Refine um produto com mais criterio visual.'
+                                : 'Monte um produto pronto para converter interesse em contato.'}
+                        </h1>
+                        <p className="mt-3 text-sm leading-7 admin-subtle-text sm:text-base">
+                            Estruture conteudo, escolha a estrategia comercial e deixe o item preparado para aparecer com mais clareza na vitrine publica.
+                        </p>
+                    </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Basic Info */}
-                <div className="card">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-                        Informações Básicas
+                    <div className="admin-panel-soft p-5">
+                        <p className="admin-kicker">Resumo da publicacao</p>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                            <span className={`admin-chip ${pricingMode === 'starting_price' ? 'admin-chip--success' : 'admin-chip--warning'}`}>
+                                {pricingMode === 'starting_price' ? 'Com valor inicial' : 'Sob orcamento'}
+                            </span>
+                            <span className={`admin-chip ${active ? 'admin-chip--success' : 'admin-chip--danger'}`}>
+                                {active ? 'Ativo' : 'Em pausa'}
+                            </span>
+                            <span className={`admin-chip ${isPromotion ? 'admin-chip--warning' : 'admin-chip--neutral'}`}>
+                                {isPromotion ? 'Em promocao' : 'Sem promocao'}
+                            </span>
+                        </div>
+                        <p className="mt-4 text-sm leading-6 admin-subtle-text">
+                            Um bom cadastro aqui deixa a leitura do catalogo mais premium e facilita a abordagem do cliente no WhatsApp.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <form onSubmit={handleSubmit} className="space-y-6 lg:space-y-8">
+                <section className="admin-panel p-6 sm:p-8">
+                    <h2 className="mb-6 text-xl font-semibold text-[color:var(--admin-obsidian)] sm:text-2xl">
+                        Informacoes Basicas
                     </h2>
 
                     <div className="space-y-4">
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <label className="mb-2 block text-sm font-medium text-[color:var(--admin-bark)]">
                                 Nome do Produto *
                             </label>
                             <input
                                 type="text"
                                 value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                className="input"
+                                onChange={(event) => setName(event.target.value)}
+                                className="admin-input"
                                 required
                             />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                Descrição *
+                            <label className="mb-2 block text-sm font-medium text-[color:var(--admin-bark)]">
+                                Descricao *
                             </label>
                             <textarea
                                 value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                                className="input"
+                                onChange={(event) => setDescription(event.target.value)}
+                                className="admin-input min-h-[9rem] resize-y"
                                 rows={5}
                                 required
                             />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <label className="mb-2 block text-sm font-medium text-[color:var(--admin-bark)]">
                                 Categoria *
                             </label>
                             <input
                                 type="text"
                                 value={category}
-                                onChange={(e) => setCategory(e.target.value)}
-                                className="input"
+                                onChange={(event) => setCategory(event.target.value)}
+                                className="admin-input"
                                 required
                             />
                         </div>
 
-                        <div className="space-y-3 rounded-2xl border border-gray-200 bg-gray-50 px-4 py-4 dark:border-gray-700 dark:bg-gray-900/40">
+                        <div className="admin-panel-soft space-y-4 p-4 sm:p-5">
                             <div>
-                                <p className="text-sm font-medium text-gray-700 dark:text-gray-200">
-                                    Forma de exibição comercial
+                                <p className="text-sm font-semibold text-[color:var(--admin-obsidian)]">
+                                    Forma de exibicao comercial
                                 </p>
-                                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                                    Escolha se o item será exibido com valor inicial ou somente por orçamento.
+                                <p className="mt-1 text-sm admin-subtle-text">
+                                    Escolha se o item sera exibido com valor inicial ou somente por orcamento.
                                 </p>
                             </div>
 
@@ -326,35 +350,29 @@ export default function ProductForm() {
                                 <button
                                     type="button"
                                     onClick={() => setPricingMode('quote')}
-                                    className={`rounded-xl border px-4 py-3 text-left transition-colors ${pricingMode === 'quote'
-                                        ? 'border-gray-900 bg-gray-900 text-white dark:border-gray-100 dark:bg-gray-100 dark:text-gray-900'
-                                        : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300'
-                                        }`}
+                                    className={`admin-toggle-card text-left ${pricingMode === 'quote' ? 'admin-toggle-card--active' : ''}`}
                                 >
-                                    <p className="text-sm font-semibold">Somente orçamento</p>
-                                    <p className={`mt-1 text-xs ${pricingMode === 'quote' ? 'text-gray-200 dark:text-gray-700' : 'text-gray-500 dark:text-gray-400'}`}>
-                                        O card e o detalhe não exibem valor, só o CTA de orçamento.
+                                    <p className="text-sm font-semibold text-[color:var(--admin-obsidian)]">Somente orcamento</p>
+                                    <p className="mt-2 text-xs leading-5 admin-subtle-text">
+                                        O card e o detalhe nao exibem valor, so o CTA de orcamento.
                                     </p>
                                 </button>
 
                                 <button
                                     type="button"
                                     onClick={() => setPricingMode('starting_price')}
-                                    className={`rounded-xl border px-4 py-3 text-left transition-colors ${pricingMode === 'starting_price'
-                                        ? 'border-gray-900 bg-gray-900 text-white dark:border-gray-100 dark:bg-gray-100 dark:text-gray-900'
-                                        : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300'
-                                        }`}
+                                    className={`admin-toggle-card text-left ${pricingMode === 'starting_price' ? 'admin-toggle-card--active' : ''}`}
                                 >
-                                    <p className="text-sm font-semibold">Exibir valor inicial</p>
-                                    <p className={`mt-1 text-xs ${pricingMode === 'starting_price' ? 'text-gray-200 dark:text-gray-700' : 'text-gray-500 dark:text-gray-400'}`}>
-                                        O público vê “a partir de” com o valor informado no card e no detalhe.
+                                    <p className="text-sm font-semibold text-[color:var(--admin-obsidian)]">Exibir valor inicial</p>
+                                    <p className="mt-2 text-xs leading-5 admin-subtle-text">
+                                        O publico ve a partir de com o valor informado no card e no detalhe.
                                     </p>
                                 </button>
                             </div>
 
                             {pricingMode === 'starting_price' ? (
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    <label className="mb-2 block text-sm font-medium text-[color:var(--admin-bark)]">
                                         Valor inicial (R$) *
                                     </label>
                                     <input
@@ -362,76 +380,70 @@ export default function ProductForm() {
                                         step="0.01"
                                         min="0"
                                         value={price}
-                                        onChange={(e) => setPrice(e.target.value)}
-                                        className="input"
+                                        onChange={(event) => setPrice(event.target.value)}
+                                        className="admin-input"
                                         placeholder="Ex: 350.00"
                                         required
                                     />
-                                    <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                                        Use o menor valor que faça sentido como ponto de partida comercial.
+                                    <p className="mt-2 text-xs admin-subtle-text">
+                                        Use o menor valor que faca sentido como ponto de partida comercial.
                                     </p>
                                 </div>
                             ) : (
-                                <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-900/40 dark:bg-amber-950/30 dark:text-amber-200">
-                                    Este item ficará com foco em contato e orçamento, sem exibir valor público.
+                                <div className="rounded-2xl border border-[rgba(192,138,44,0.22)] bg-[color:var(--admin-warning-soft)] px-4 py-3 text-sm text-[color:var(--admin-bark)]">
+                                    Este item ficara com foco em contato e orcamento, sem exibir valor publico.
                                 </div>
                             )}
                         </div>
 
-                        <div className="flex items-center">
-                            <input
-                                type="checkbox"
-                                id="active"
-                                checked={active}
-                                onChange={(e) => setActive(e.target.checked)}
-                                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                            />
-                            <label htmlFor="active" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
-                                Produto ativo (visível no catálogo público)
-                            </label>
-                        </div>
+                        <div className="space-y-3">
+                            <div className="admin-checkbox-row flex items-center">
+                                <input
+                                    type="checkbox"
+                                    id="active"
+                                    checked={active}
+                                    onChange={(event) => setActive(event.target.checked)}
+                                    className="h-4 w-4 rounded border-[color:var(--admin-line-strong)] text-[color:var(--admin-obsidian)] focus:ring-[color:var(--admin-accent)]"
+                                />
+                                <label htmlFor="active" className="ml-3 block text-sm text-[color:var(--admin-bark)]">
+                                    Produto ativo (visivel no catalogo publico)
+                                </label>
+                            </div>
 
-                        <div className="flex items-center">
-                            <input
-                                type="checkbox"
-                                id="is_promotion"
-                                checked={isPromotion}
-                                onChange={(e) => setIsPromotion(e.target.checked)}
-                                className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
-                            />
-                            <label htmlFor="is_promotion" className="ml-2 block text-sm text-gray-700 dark:text-gray-300 flex items-center">
-                                🔥 Produto em promoção (destaque especial)
-                            </label>
+                            <div className="admin-checkbox-row flex items-center">
+                                <input
+                                    type="checkbox"
+                                    id="is_promotion"
+                                    checked={isPromotion}
+                                    onChange={(event) => setIsPromotion(event.target.checked)}
+                                    className="h-4 w-4 rounded border-[color:var(--admin-line-strong)] text-[color:var(--admin-danger)] focus:ring-[color:var(--admin-danger)]"
+                                />
+                                <label htmlFor="is_promotion" className="ml-3 block text-sm text-[color:var(--admin-bark)]">
+                                    Produto em promocao (destaque especial)
+                                </label>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                {/* Images */}
-                <div className="card">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                <section className="admin-panel p-6 sm:p-8">
+                    <h2 className="mb-6 text-xl font-semibold text-[color:var(--admin-obsidian)] sm:text-2xl">
                         Imagens
                     </h2>
 
-                    {/* Existing Images */}
                     {existingImages.length > 0 && (
-                        <div className="mb-4">
-                            <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                                Imagens atuais:
-                            </p>
+                        <div className="mb-5">
+                            <p className="mb-3 text-sm admin-subtle-text">Imagens atuais:</p>
                             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 sm:gap-4">
                                 {existingImages.map((url, index) => (
-                                    <div key={index} className="relative group">
-                                        <img
-                                            src={url}
-                                            alt={`Image ${index + 1}`}
-                                            className="w-full h-32 object-cover rounded"
-                                        />
+                                    <div key={index} className="admin-image-tile group">
+                                        <img src={url} alt={`Imagem ${index + 1}`} />
                                         <button
                                             type="button"
                                             onClick={() => removeExistingImage(index)}
-                                            className="absolute top-2 right-2 rounded bg-red-600 p-1 text-white opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100"
+                                            className="absolute right-2 top-2 rounded-full bg-[rgba(24,20,16,0.86)] p-2 text-white opacity-100 transition-opacity hover:bg-[rgba(24,20,16,0.96)] sm:opacity-0 sm:group-hover:opacity-100"
                                         >
-                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                             </svg>
                                         </button>
@@ -441,26 +453,19 @@ export default function ProductForm() {
                         </div>
                     )}
 
-                    {/* New Image Previews */}
                     {imagePreviews.length > 0 && (
-                        <div className="mb-4">
-                            <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                                Novas imagens:
-                            </p>
+                        <div className="mb-5">
+                            <p className="mb-3 text-sm admin-subtle-text">Novas imagens:</p>
                             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 sm:gap-4">
                                 {imagePreviews.map((preview, index) => (
-                                    <div key={index} className="relative group">
-                                        <img
-                                            src={preview}
-                                            alt={`Preview ${index + 1}`}
-                                            className="w-full h-32 object-cover rounded"
-                                        />
+                                    <div key={index} className="admin-image-tile group">
+                                        <img src={preview} alt={`Preview ${index + 1}`} />
                                         <button
                                             type="button"
                                             onClick={() => removeNewImage(index)}
-                                            className="absolute top-2 right-2 rounded bg-red-600 p-1 text-white opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100"
+                                            className="absolute right-2 top-2 rounded-full bg-[rgba(24,20,16,0.86)] p-2 text-white opacity-100 transition-opacity hover:bg-[rgba(24,20,16,0.96)] sm:opacity-0 sm:group-hover:opacity-100"
                                         >
-                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                             </svg>
                                         </button>
@@ -470,9 +475,8 @@ export default function ProductForm() {
                         </div>
                     )}
 
-                    {/* Upload Input */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        <label className="mb-2 block text-sm font-medium text-[color:var(--admin-bark)]">
                             Adicionar mais imagens
                         </label>
                         <input
@@ -480,90 +484,88 @@ export default function ProductForm() {
                             accept="image/*"
                             multiple
                             onChange={handleImageChange}
-                            className="block w-full text-sm text-gray-900 dark:text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                            className="admin-input text-sm"
                         />
-                        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                            PNG, JPG, WEBP até 5MB. Múltiplas imagens permitidas.
+                        <p className="mt-2 text-sm admin-subtle-text">
+                            PNG, JPG e WEBP ate 5MB. Multiplas imagens permitidas.
                         </p>
                     </div>
-                </div>
+                </section>
 
-                {/* WhatsApp */}
-                <div className="card">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                <section className="admin-panel p-6 sm:p-8">
+                    <h2 className="mb-6 text-xl font-semibold text-[color:var(--admin-obsidian)] sm:text-2xl">
                         Contato via WhatsApp
                     </h2>
 
                     <div className="space-y-4">
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                Número do WhatsApp * (formato: 11999999999)
+                            <label className="mb-2 block text-sm font-medium text-[color:var(--admin-bark)]">
+                                Numero do WhatsApp * (formato: 11999999999)
                             </label>
                             <input
                                 type="tel"
                                 value={whatsappNumber}
-                                onChange={(e) => setWhatsappNumber(e.target.value)}
-                                className="input"
+                                onChange={(event) => setWhatsappNumber(event.target.value)}
+                                className="admin-input"
                                 placeholder="11999999999"
                                 required
                             />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <label className="mb-2 block text-sm font-medium text-[color:var(--admin-bark)]">
                                 Mensagem Personalizada (opcional)
                             </label>
                             <textarea
                                 value={whatsappMessage}
-                                onChange={(e) => setWhatsappMessage(e.target.value)}
-                                className="input"
+                                onChange={(event) => setWhatsappMessage(event.target.value)}
+                                className="admin-input min-h-[7rem] resize-y"
                                 rows={3}
-                                placeholder="Ex: Olá! Vi seu produto no catálogo e gostaria de mais informações."
+                                placeholder="Ex: Ola! Vi seu produto no catalogo e gostaria de mais informacoes."
                             />
-                            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                                Se deixar vazio, uma mensagem padrão será usada.
+                            <p className="mt-2 text-sm admin-subtle-text">
+                                Se deixar vazio, uma mensagem padrao sera usada.
                             </p>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                {/* Specifications */}
-                <div className="card">
+                <section className="admin-panel p-6 sm:p-8">
                     <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                        <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                            Especificações Técnicas
+                        <h2 className="text-xl font-semibold text-[color:var(--admin-obsidian)] sm:text-2xl">
+                            Especificacoes Tecnicas
                         </h2>
                         <button
                             type="button"
                             onClick={addSpecification}
-                            className="btn-secondary w-full text-sm sm:w-auto"
+                            className="admin-button-secondary w-full sm:w-auto"
                         >
                             + Adicionar
                         </button>
                     </div>
 
                     <div className="space-y-3">
-                        {specifications.map((spec, index) => (
+                        {specifications.map((specification, index) => (
                             <div key={index} className="flex flex-col gap-2 sm:flex-row">
                                 <input
                                     type="text"
-                                    value={spec.key}
-                                    onChange={(e) => updateSpecification(index, 'key', e.target.value)}
+                                    value={specification.key}
+                                    onChange={(event) => updateSpecification(index, 'key', event.target.value)}
                                     placeholder="Nome (ex: Peso)"
-                                    className="input w-full sm:flex-1"
+                                    className="admin-input w-full sm:flex-1"
                                 />
                                 <input
                                     type="text"
-                                    value={spec.value}
-                                    onChange={(e) => updateSpecification(index, 'value', e.target.value)}
+                                    value={specification.value}
+                                    onChange={(event) => updateSpecification(index, 'value', event.target.value)}
                                     placeholder="Valor (ex: 2kg)"
-                                    className="input w-full sm:flex-1"
+                                    className="admin-input w-full sm:flex-1"
                                 />
                                 {specifications.length > 1 && (
                                     <button
                                         type="button"
                                         onClick={() => removeSpecification(index)}
-                                        className="btn-danger w-full sm:w-auto"
+                                        className="admin-button-danger w-full sm:w-auto"
                                     >
                                         Remover
                                     </button>
@@ -571,21 +573,16 @@ export default function ProductForm() {
                             </div>
                         ))}
                     </div>
-                </div>
+                </section>
 
-                {/* Submit Buttons */}
                 <div className="flex flex-col gap-3 sm:flex-row">
-                    <button
-                        type="submit"
-                        disabled={isLoading}
-                        className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
-                    >
+                    <button type="submit" disabled={isLoading} className="admin-button-primary w-full sm:w-auto">
                         {isLoading ? 'Salvando...' : isEditing ? 'Atualizar Produto' : 'Criar Produto'}
                     </button>
                     <button
                         type="button"
                         onClick={() => navigate('/admin/produtos')}
-                        className="btn-secondary w-full sm:w-auto"
+                        className="admin-button-secondary w-full sm:w-auto"
                     >
                         Cancelar
                     </button>

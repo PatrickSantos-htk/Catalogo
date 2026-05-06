@@ -103,6 +103,14 @@ export default function AdminProducts() {
         return 'Sob orçamento'
     }
 
+    const totalActive = products.filter((product) => product.active).length
+    const totalInactive = products.length - totalActive
+    const statusOptions: Array<{ value: 'all' | 'active' | 'inactive'; label: string; count: number }> = [
+        { value: 'all', label: 'Todos', count: products.length },
+        { value: 'active', label: 'Ativos', count: totalActive },
+        { value: 'inactive', label: 'Inativos', count: totalInactive },
+    ]
+
     if (isLoading) {
         return (
             <div className="flex items-center justify-center py-12">
@@ -112,99 +120,168 @@ export default function AdminProducts() {
     }
 
     return (
-        <div className="space-y-5 sm:space-y-6">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-                <div>
-                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl">
-                        Gerenciar Produtos
-                    </h1>
-                    <p className="text-gray-600 dark:text-gray-400 mt-2">
-                        {filteredProducts.length} {filteredProducts.length === 1 ? 'produto' : 'produtos'}
-                    </p>
-                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                        Cada item pode ser exibido com valor inicial ou somente por orçamento.
-                    </p>
-                </div>
-                <Link to="/admin/produtos/novo" className="btn-primary inline-flex w-full items-center justify-center sm:w-auto">
-                    + Novo Produto
-                </Link>
-            </div>
+        <div className="space-y-6 lg:space-y-8">
+            <section className="admin-panel p-6 sm:p-8">
+                <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
+                    <div className="max-w-3xl">
+                        <p className="admin-kicker">Curadoria do portfolio</p>
+                        <h1 className="mt-2 text-3xl font-semibold text-[color:var(--admin-obsidian)] sm:text-4xl">
+                            Produtos com leitura mais clara e comercial.
+                        </h1>
+                        <p className="mt-3 text-sm leading-7 admin-subtle-text sm:text-base">
+                            Esta tela foi organizada para revisar status, encontrar itens rapido e manter a vitrine consistente com o atendimento consultivo.
+                        </p>
+                    </div>
 
-            {/* Filters */}
-            <div className="card">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid gap-3 sm:grid-cols-3 xl:min-w-[28rem]">
+                        <div className="admin-panel-soft p-4">
+                            <p className="admin-kicker">Visiveis</p>
+                            <p className="mt-3 text-2xl font-semibold text-[color:var(--admin-obsidian)]">
+                                {totalActive}
+                            </p>
+                            <p className="mt-2 text-sm admin-subtle-text">
+                                Itens ativos no catalogo.
+                            </p>
+                        </div>
+
+                        <div className="admin-panel-soft p-4">
+                            <p className="admin-kicker">Em pausa</p>
+                            <p className="mt-3 text-2xl font-semibold text-[color:var(--admin-obsidian)]">
+                                {totalInactive}
+                            </p>
+                            <p className="mt-2 text-sm admin-subtle-text">
+                                Produtos fora de exibicao.
+                            </p>
+                        </div>
+
+                        <div className="admin-panel-soft p-4">
+                            <p className="admin-kicker">Filtrados</p>
+                            <p className="mt-3 text-2xl font-semibold text-[color:var(--admin-obsidian)]">
+                                {filteredProducts.length}
+                            </p>
+                            <p className="mt-2 text-sm admin-subtle-text">
+                                Resultado da busca atual.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="admin-section-divider mt-6" />
+
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div>
+                        <p className="text-sm font-medium text-[color:var(--admin-obsidian)]">
+                            {filteredProducts.length} {filteredProducts.length === 1 ? 'produto encontrado' : 'produtos encontrados'}
+                        </p>
+                        <p className="mt-1 text-sm admin-subtle-text">
+                            Cada item pode aparecer com valor inicial ou somente por orcamento.
+                        </p>
+                    </div>
+                    <Link to="/admin/produtos/novo" className="admin-button-primary w-full sm:w-auto">
+                        + Novo produto
+                    </Link>
+                </div>
+            </section>
+
+            <section className="admin-panel p-5 sm:p-6">
+                <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_auto] xl:items-end">
+                    <div>
+                        <label className="mb-2 block text-sm font-medium text-[color:var(--admin-bark)]">
+                            Buscar por nome
+                        </label>
                         <input
                             type="text"
-                            placeholder="Buscar produtos..."
+                            placeholder="Ex: bancada sob medida"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="input"
+                            className="admin-input"
                         />
                     </div>
+
                     <div>
-                        <select
-                            value={filterStatus}
-                            onChange={(e) => setFilterStatus(e.target.value as any)}
-                            className="input"
-                        >
-                            <option value="all">Todos os status</option>
-                            <option value="active">Apenas ativos</option>
-                            <option value="inactive">Apenas inativos</option>
-                        </select>
+                        <p className="mb-2 text-sm font-medium text-[color:var(--admin-bark)]">
+                            Status da vitrine
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                            {statusOptions.map((option) => {
+                                const isActive = filterStatus === option.value
+
+                                return (
+                                    <button
+                                        key={option.value}
+                                        type="button"
+                                        onClick={() => setFilterStatus(option.value)}
+                                        className={isActive ? 'admin-button-primary' : 'admin-button-secondary'}
+                                    >
+                                        {option.label}
+                                        <span className={isActive ? 'text-white/72' : 'text-[color:var(--admin-bark)]/70'}>
+                                            {option.count}
+                                        </span>
+                                    </button>
+                                )
+                            })}
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            {/* Products Table */}
             {filteredProducts.length === 0 ? (
-                <div className="card text-center py-12">
-                    <p className="text-gray-600 dark:text-gray-400 text-lg">
-                        Nenhum produto encontrado
+                <section className="admin-panel px-6 py-12 text-center sm:px-8">
+                    <p className="text-xl font-semibold text-[color:var(--admin-obsidian)]">
+                        Nenhum produto encontrado.
                     </p>
-                </div>
+                    <p className="mt-2 text-sm admin-subtle-text">
+                        Ajuste a busca ou o filtro para localizar itens da vitrine.
+                    </p>
+                </section>
             ) : (
-                <div className="card space-y-4">
-                    <div className="space-y-3 md:hidden">
+                <section className="admin-panel p-5 sm:p-6 lg:p-8">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                        <div>
+                            <p className="admin-kicker">Lista operacional</p>
+                            <h2 className="mt-2 text-2xl font-semibold text-[color:var(--admin-obsidian)]">
+                                Produtos prontos para acao rapida.
+                            </h2>
+                        </div>
+                        <p className="admin-subtle-text text-sm">
+                            Edite, pause ou remova sem perder contexto comercial.
+                        </p>
+                    </div>
+
+                    <div className="mt-6 space-y-3 md:hidden">
                         {filteredProducts.map((product) => (
-                            <article key={product.id} className="rounded-2xl border border-gray-200 p-4 dark:border-gray-700">
-                                <div className="flex items-start gap-3">
+                            <article key={product.id} className="admin-list-card p-4 sm:p-5">
+                                <div className="flex items-start gap-4">
                                     <img
                                         src={product.images[0] || '/placeholder-product.png'}
                                         alt={product.name}
-                                        className="h-16 w-16 rounded-xl object-cover"
+                                        className="h-20 w-20 rounded-[1.1rem] object-cover shadow-sm"
                                     />
 
                                     <div className="min-w-0 flex-1">
                                         <div className="flex flex-wrap items-start justify-between gap-2">
                                             <div className="min-w-0">
-                                                <h2 className="truncate text-sm font-semibold text-gray-900 dark:text-white">
+                                                <h2 className="truncate text-base font-semibold text-[color:var(--admin-obsidian)]">
                                                     {product.name}
                                                 </h2>
-                                                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                                <p className="mt-1 text-xs admin-subtle-text">
                                                     Criado em {formatDate(product.created_at)}
                                                 </p>
                                             </div>
 
                                             <button
                                                 onClick={() => handleToggleActive(product.id, product.active)}
-                                                className={`rounded-full px-3 py-1 text-xs font-medium ${product.active
-                                                    ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300'
-                                                    : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300'
-                                                    }`}
+                                                className={`admin-chip ${product.active ? 'admin-chip--success' : 'admin-chip--danger'}`}
                                             >
                                                 {product.active ? 'Ativo' : 'Inativo'}
                                             </button>
                                         </div>
 
                                         <div className="mt-3 flex flex-wrap items-center gap-2">
-                                            <span className="rounded-full bg-blue-100 px-2.5 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
+                                            <span className="admin-chip admin-chip--info">
                                                 {product.category}
                                             </span>
-                                            <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${product.pricing_mode === 'starting_price'
-                                                ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300'
-                                                : 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300'
-                                                }`}>
+                                            <span className={`admin-chip ${product.pricing_mode === 'starting_price' ? 'admin-chip--success' : 'admin-chip--warning'}`}>
                                                 {getPricingText(product)}
                                             </span>
                                         </div>
@@ -214,13 +291,13 @@ export default function AdminProducts() {
                                 <div className="mt-4 flex flex-col gap-2 sm:flex-row">
                                     <Link
                                         to={`/admin/produtos/editar/${product.id}`}
-                                        className="inline-flex flex-1 items-center justify-center rounded-xl bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                                        className="admin-button-primary flex-1"
                                     >
                                         Editar
                                     </Link>
                                     <button
                                         onClick={() => handleDelete(product.id, product.images)}
-                                        className="inline-flex flex-1 items-center justify-center rounded-xl bg-red-50 px-4 py-2 text-sm font-medium text-red-600 transition-colors hover:bg-red-100 dark:bg-red-950/30 dark:text-red-400 dark:hover:bg-red-950/50"
+                                        className="admin-button-danger flex-1"
                                     >
                                         Excluir
                                     </button>
@@ -229,87 +306,78 @@ export default function AdminProducts() {
                         ))}
                     </div>
 
-                    <div className="hidden overflow-x-auto md:block">
-                        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <div className="mt-6 hidden overflow-x-auto md:block">
+                        <table className="admin-table min-w-full">
                             <thead>
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                        Imagem
-                                    </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                        Nome
-                                    </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                        Categoria
-                                    </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                        Comercial
-                                    </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                        Status
-                                    </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                        Ações
-                                    </th>
+                                    <th>Imagem</th>
+                                    <th>Nome</th>
+                                    <th>Categoria</th>
+                                    <th>Comercial</th>
+                                    <th>Status</th>
+                                    <th>Acoes</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                            <tbody>
                                 {filteredProducts.map((product) => (
-                                    <tr key={product.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
-                                        <td className="whitespace-nowrap px-6 py-4">
+                                    <tr key={product.id}>
+                                        <td className="whitespace-nowrap">
                                             <img
                                                 src={product.images[0] || '/placeholder-product.png'}
                                                 alt={product.name}
-                                                className="h-16 w-16 rounded object-cover"
+                                                className="h-16 w-16 rounded-[1rem] object-cover"
                                             />
                                         </td>
-                                        <td className="px-6 py-4">
-                                            <div className="text-sm font-medium text-gray-900 dark:text-white">
-                                                {product.name}
-                                            </div>
-                                            <div className="text-sm text-gray-500 dark:text-gray-400">
-                                                Criado em {formatDate(product.created_at)}
+                                        <td>
+                                            <div className="min-w-0">
+                                                <p className="text-sm font-semibold text-[color:var(--admin-obsidian)]">
+                                                    {product.name}
+                                                </p>
+                                                <p className="mt-1 text-sm admin-subtle-text">
+                                                    Criado em {formatDate(product.created_at)}
+                                                </p>
                                             </div>
                                         </td>
-                                        <td className="whitespace-nowrap px-6 py-4">
-                                            <span className="rounded bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
+                                        <td className="whitespace-nowrap">
+                                            <span className="admin-chip admin-chip--info">
                                                 {product.category}
                                             </span>
                                         </td>
-                                        <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
-                                            {getPricingText(product)}
+                                        <td className="whitespace-nowrap">
+                                            <span className={`admin-chip ${product.pricing_mode === 'starting_price' ? 'admin-chip--success' : 'admin-chip--warning'}`}>
+                                                {getPricingText(product)}
+                                            </span>
                                         </td>
-                                        <td className="whitespace-nowrap px-6 py-4">
+                                        <td className="whitespace-nowrap">
                                             <button
                                                 onClick={() => handleToggleActive(product.id, product.active)}
-                                                className={`rounded px-3 py-1 text-xs font-medium ${product.active
-                                                    ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300'
-                                                    : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300'
-                                                    }`}
+                                                className={`admin-chip ${product.active ? 'admin-chip--success' : 'admin-chip--danger'}`}
                                             >
                                                 {product.active ? 'Ativo' : 'Inativo'}
                                             </button>
                                         </td>
-                                        <td className="whitespace-nowrap px-6 py-4 text-sm font-medium space-x-2">
-                                            <Link
-                                                to={`/admin/produtos/editar/${product.id}`}
-                                                className="text-blue-600 hover:underline dark:text-blue-400"
-                                            >
-                                                Editar
-                                            </Link>
-                                            <button
-                                                onClick={() => handleDelete(product.id, product.images)}
-                                                className="text-red-600 hover:underline dark:text-red-400"
-                                            >
-                                                Excluir
-                                            </button>
+                                        <td>
+                                            <div className="flex flex-wrap gap-2">
+                                                <Link
+                                                    to={`/admin/produtos/editar/${product.id}`}
+                                                    className="admin-button-secondary px-4 py-2 text-sm"
+                                                >
+                                                    Editar
+                                                </Link>
+                                                <button
+                                                    onClick={() => handleDelete(product.id, product.images)}
+                                                    className="admin-button-danger px-4 py-2 text-sm"
+                                                >
+                                                    Excluir
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </section>
             )}
         </div>
     )

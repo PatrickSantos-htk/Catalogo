@@ -102,3 +102,20 @@
 - Não misturar muitos estilos de card na mesma seção sem motivo de conteúdo
 - Preservar a separação visual entre área pública sofisticada e admin utilitário
 - Evitar decisões que façam a vitrine parecer marketplace comum; a percepção deve ser de serviço premium e atendimento consultivo
+
+## Admin Backoffice
+
+### Extract
+- Spacing observed: base de 4px, com uso recorrente de 12, 16, 20, 24 e 32 para header, hero, cards, tabelas e grupos de formulario.
+- Radius observed: 12 a 16 para inputs, chips e toggles; 20 a 24 para cards de lista e blocos internos; 28 a 32 para hero, painéis principais e cards de métrica.
+- Surface and depth: canvas claro alinhado ao catalogo publico, sidebar e hero em gradiente preto/carvao, painéis claros com borda cinza sutil e sombra média; listas e imagens usam uma camada mais leve acima do painel pai.
+- Palette roles: obsidian para estrutura e CTA principal, bark para texto secundário, stone/sand/paper para superfícies, silver para contraste suave, verde reservado para sucesso e WhatsApp, danger/warning apenas como apoio sem dominar a interface.
+- Repeated patterns: botões em pílula com primary escuro, secondary claro translúcido e danger tonal; métricas em cards editoriais por categoria de dado; filtros com input largo + segmentação por status; formulários com painéis agrupados e seletor visual de modo comercial.
+
+### Proposal
+- O admin deve continuar distinto da vitrine pública, mas ligado a ela pela mesma família cromática: preto, carvão, silver e ivory, com verde reservado à conversão e leitura de sucesso.
+- Reutilizar sempre que possível: `admin-panel`, `admin-panel-soft`, `admin-list-card`, `admin-button-*`, `admin-chip-*`, `admin-input`, `admin-toggle-card` e `admin-stat-card`.
+- Estrutura padrão para dashboards: hero narrativo, blocos de pulso operacional, ranking/lista e atalhos com hierarquia clara.
+- Estrutura padrão para CRUD: painel de resumo, painel de filtros segmentados e tabela/cartões móveis com ações visíveis sem poluição visual.
+- Estrutura padrão para formulários: introdução contextual, seções por tarefa, inputs com a mesma superfície e uma área explícita para decisões comerciais como preço, promoção e CTA.
+- Evitar voltar para tons bege, marrom ou roxo no admin se eles não existirem na vitrine publica; o backoffice deve parecer parte do mesmo produto, não outro tema.
