@@ -437,7 +437,75 @@ export default function AdminDashboard() {
                 </div>
             </section>
 
-            <div className="grid gap-6 xl:grid-cols-[minmax(0,1.3fr)_minmax(320px,0.7fr)]">
+            <section className="space-y-4 md:hidden">
+                <div className="flex flex-col gap-2">
+                    <p className="admin-kicker">Resumo rápido</p>
+                    <h2 className="text-2xl font-semibold text-[color:var(--admin-obsidian)]">
+                        Interesse e categorias em leitura compacta.
+                    </h2>
+                    <p className="admin-subtle-text text-sm">
+                        No mobile, mostramos só os sinais principais para evitar quebra de layout.
+                    </p>
+                </div>
+
+                <div className="grid gap-4">
+                    <article className="admin-panel p-5">
+                        <p className="admin-kicker">Ranking de interesse</p>
+                        <h3 className="mt-2 text-lg font-semibold text-[color:var(--admin-obsidian)]">
+                            {analyticsStats.topProduct?.name ?? 'Nenhum contato ainda'}
+                        </h3>
+                        <p className="mt-2 text-sm admin-subtle-text">
+                            {analyticsStats.topProduct
+                                ? `${formatMetric(analyticsStats.topProduct.clicks)} contatos acumulados no WhatsApp.`
+                                : 'Assim que houver cliques no WhatsApp, o produto líder aparece aqui.'}
+                        </p>
+
+                        <div className="mt-4 grid grid-cols-2 gap-3">
+                            <div className="admin-panel-soft p-4">
+                                <p className="admin-kicker">Hoje</p>
+                                <p className="mt-2 text-xl font-semibold text-[color:var(--admin-obsidian)]">
+                                    {formatMetric(analyticsStats.clicksToday)}
+                                </p>
+                            </div>
+                            <div className="admin-panel-soft p-4">
+                                <p className="admin-kicker">7 dias</p>
+                                <p className="mt-2 text-xl font-semibold text-[color:var(--admin-obsidian)]">
+                                    {formatMetric(analyticsStats.clicksWeek)}
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article className="admin-panel p-5">
+                        <p className="admin-kicker">Produtos por categoria</p>
+                        <h3 className="mt-2 text-lg font-semibold text-[color:var(--admin-obsidian)]">
+                            {leadingCategory?.[0] ?? 'Sem categorias ainda'}
+                        </h3>
+                        <p className="mt-2 text-sm admin-subtle-text">
+                            {leadingCategory
+                                ? `${formatMetric(leadingCategory[1])} itens lideram a distribuição atual do catálogo.`
+                                : 'Assim que os produtos forem classificados, a categoria líder aparece aqui.'}
+                        </p>
+
+                        <div className="mt-4 grid grid-cols-2 gap-3">
+                            <div className="admin-panel-soft p-4">
+                                <p className="admin-kicker">Categorias</p>
+                                <p className="mt-2 text-xl font-semibold text-[color:var(--admin-obsidian)]">
+                                    {formatMetric(categoryEntries.length)}
+                                </p>
+                            </div>
+                            <div className="admin-panel-soft p-4">
+                                <p className="admin-kicker">Total</p>
+                                <p className="mt-2 text-xl font-semibold text-[color:var(--admin-obsidian)]">
+                                    {formatMetric(stats.totalProducts)}
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <div className="hidden gap-6 md:grid xl:grid-cols-[minmax(0,1.3fr)_minmax(320px,0.7fr)]">
                 <section className="admin-panel p-6 sm:p-8">
                     <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                         <div>
@@ -456,7 +524,7 @@ export default function AdminDashboard() {
                             <div className="mt-6 space-y-3 md:hidden">
                                 {analyticsStats.productClicks.map((product, index) => (
                                     <article key={product.id} className="admin-list-card p-4 sm:p-5">
-                                        <div className="flex items-start gap-3">
+                                        <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
                                             <span className="admin-rank-badge">
                                                 {index + 1}
                                             </span>
@@ -471,7 +539,7 @@ export default function AdminDashboard() {
                                                     </span>
                                                 </div>
 
-                                                <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+                                                <div className="mt-4 grid grid-cols-1 gap-2 text-center min-[420px]:grid-cols-3">
                                                     <div className="rounded-2xl bg-[color:var(--admin-success-soft)] px-3 py-3">
                                                         <p className="admin-kicker">Total</p>
                                                         <p className="mt-2 text-lg font-semibold text-[color:var(--admin-success)]">
@@ -576,9 +644,9 @@ export default function AdminDashboard() {
 
                                 return (
                                     <article key={category} className="admin-list-card p-4 sm:p-5">
-                                        <div className="flex items-center justify-between gap-3">
-                                            <div>
-                                                <h3 className="text-sm font-semibold text-[color:var(--admin-obsidian)] sm:text-base">
+                                        <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+                                            <div className="min-w-0 flex-1">
+                                                <h3 className="break-words text-sm font-semibold text-[color:var(--admin-obsidian)] sm:text-base">
                                                     {category}
                                                 </h3>
                                                 <p className="mt-1 text-sm admin-subtle-text">
