@@ -155,7 +155,7 @@ export default function AdminDashboard() {
         {
             label: 'Total de produtos',
             value: formatMetric(stats.totalProducts),
-            note: 'Base completa publicada no catalogo',
+            note: 'Base completa publicada no catálogo',
             variant: 'admin-stat-card--bronze',
             iconVariant: 'admin-stat-icon--dark',
             icon: (
@@ -179,7 +179,7 @@ export default function AdminDashboard() {
         {
             label: 'Produtos inativos',
             value: formatMetric(stats.inactiveProducts),
-            note: 'Itens que ainda precisam de revisao ou aprovacao',
+            note: 'Itens que ainda precisam de revisão ou aprovação',
             variant: 'admin-stat-card--rose',
             iconVariant: 'admin-stat-icon--rose',
             icon: (
@@ -218,7 +218,7 @@ export default function AdminDashboard() {
         {
             label: 'Contatos hoje',
             value: formatMetric(analyticsStats.clicksToday),
-            note: 'Janela das ultimas 24 horas',
+            note: 'Janela das últimas 24 horas',
             variant: 'admin-stat-card--info',
             iconVariant: 'admin-stat-icon--info',
             icon: (
@@ -230,7 +230,7 @@ export default function AdminDashboard() {
         {
             label: 'Contatos na semana',
             value: formatMetric(analyticsStats.clicksWeek),
-            note: 'Leitura dos ultimos 7 dias',
+            note: 'Leitura dos últimos 7 dias',
             variant: 'admin-stat-card--violet',
             iconVariant: 'admin-stat-icon--violet',
             icon: (
@@ -240,7 +240,7 @@ export default function AdminDashboard() {
             ),
         },
         {
-            label: 'Produto lider',
+            label: 'Produto líder',
             value: analyticsStats.topProduct ? analyticsStats.topProduct.name : 'Nenhum ainda',
             note: analyticsStats.topProduct ? `${formatMetric(analyticsStats.topProduct.clicks)} contatos acumulados` : 'O ranking aparece assim que houver interesse do cliente',
             variant: 'admin-stat-card--warning',
@@ -267,14 +267,14 @@ export default function AdminDashboard() {
                 <div className="relative z-10 grid gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.8fr)]">
                     <div>
                         <span className="admin-badge admin-badge-dark">
-                            Operacao comercial do catalogo
+                            Operação comercial do catálogo
                         </span>
 
                         <h1 className="mt-5 max-w-3xl text-3xl font-semibold leading-tight text-white sm:text-4xl xl:text-5xl">
-                            Um admin que transmite controle, criterio e atencao ao cliente.
+                            Um admin que transmite controle, critério e atenção ao cliente.
                         </h1>
                         <p className="mt-4 max-w-2xl text-base leading-7 text-white/72 sm:text-lg">
-                            A leitura agora destaca saude do catalogo, resposta comercial e o que esta puxando interesse real no WhatsApp.
+                            A leitura agora destaca saúde do catálogo, resposta comercial e o que está puxando interesse real no WhatsApp.
                         </p>
 
                         <div className="mt-8 grid gap-3 sm:grid-cols-3">
@@ -284,7 +284,7 @@ export default function AdminDashboard() {
                                     {activeRate}%
                                 </p>
                                 <p className="mt-2 text-sm leading-6 text-white/66">
-                                    Produtos disponiveis e prontos para venda consultiva.
+                                    Produtos disponíveis e prontos para venda consultiva.
                                 </p>
                             </div>
 
@@ -294,17 +294,17 @@ export default function AdminDashboard() {
                                     {formatMetric(analyticsStats.totalClicks)}
                                 </p>
                                 <p className="mt-2 text-sm leading-6 text-white/66">
-                                    Cliques no canal principal de conversao do negocio.
+                                    Cliques no canal principal de conversão do negócio.
                                 </p>
                             </div>
 
                             <div className="admin-hero-panel p-4 sm:p-5">
-                                <p className="admin-kicker admin-kicker-on-dark">Categoria lider</p>
+                                <p className="admin-kicker admin-kicker-on-dark">Categoria líder</p>
                                 <p className="mt-3 text-2xl font-semibold text-white">
                                     {leadingCategory?.[0] ?? 'Aguardando dados'}
                                 </p>
                                 <p className="mt-2 text-sm leading-6 text-white/66">
-                                    {leadingCategory ? `${formatMetric(leadingCategory[1])} itens concentram mais presenca no catalogo.` : 'Assim que houver produtos categorizados, o destaque aparece aqui.'}
+                                    {leadingCategory ? `${formatMetric(leadingCategory[1])} itens concentram mais presença no catálogo.` : 'Assim que houver produtos categorizados, o destaque aparece aqui.'}
                                 </p>
                             </div>
                         </div>
@@ -321,30 +321,30 @@ export default function AdminDashboard() {
                                 {analyticsStats.topProduct?.name ?? 'Nenhum contato ainda'}
                             </p>
                             <p className="mt-2 text-sm leading-6 text-white/66">
-                                {analyticsStats.topProduct
-                                    ? `${formatMetric(analyticsStats.topProduct.clicks)} contatos acumulados no WhatsApp.`
-                                    : 'Os primeiros contatos vao transformar este bloco em um termometro comercial.'}
+                                    {analyticsStats.topProduct
+                                        ? `${formatMetric(analyticsStats.topProduct.clicks)} contatos acumulados no WhatsApp.`
+                                        : 'Os primeiros contatos vão transformar este bloco em um termômetro comercial.'}
                             </p>
                         </div>
 
                         <div className="mt-4 grid gap-3 sm:grid-cols-2">
                             <div className="rounded-2xl border border-white/12 bg-white/8 p-4">
-                                <p className="admin-kicker admin-kicker-on-dark">Ritmo diario</p>
+                                <p className="admin-kicker admin-kicker-on-dark">Ritmo diário</p>
                                 <p className="mt-2 text-2xl font-semibold text-white">
                                     {formatMetric(analyticsStats.clicksToday)}
                                 </p>
                                 <p className="mt-2 text-sm text-white/64">
-                                    Contatos nas ultimas 24 horas.
+                                    Contatos nas últimas 24 horas.
                                 </p>
                             </div>
 
                             <div className="rounded-2xl border border-white/12 bg-white/8 p-4">
-                                <p className="admin-kicker admin-kicker-on-dark">Oferta visivel</p>
+                                <p className="admin-kicker admin-kicker-on-dark">Oferta visível</p>
                                 <p className="mt-2 text-2xl font-semibold text-white">
                                     {formatMetric(stats.totalProducts - stats.inactiveProducts)}
                                 </p>
                                 <p className="mt-2 text-sm text-white/64">
-                                    Itens em exposicao com leitura comercial pronta.
+                                    Itens em exposição com leitura comercial pronta.
                                 </p>
                             </div>
                         </div>
@@ -369,12 +369,12 @@ export default function AdminDashboard() {
 
             <section className="space-y-4">
                 <div className="flex flex-col gap-2">
-                    <p className="admin-kicker">Pulso do catalogo</p>
+                    <p className="admin-kicker">Pulso do catálogo</p>
                     <h2 className="text-2xl font-semibold text-[color:var(--admin-obsidian)]">
                         Estoque editorial do que o cliente enxerga.
                     </h2>
                     <p className="admin-subtle-text text-sm sm:text-base">
-                        Cards com peso diferente para ativos, categorias e gargalos de publicacao.
+                        Cards com peso diferente para ativos, categorias e gargalos de publicação.
                     </p>
                 </div>
 
@@ -406,10 +406,10 @@ export default function AdminDashboard() {
                 <div className="flex flex-col gap-2">
                     <p className="admin-kicker">Leitura comercial</p>
                     <h2 className="text-2xl font-semibold text-[color:var(--admin-obsidian)]">
-                        O que esta puxando conversa com o cliente.
+                        O que está puxando conversa com o cliente.
                     </h2>
                     <p className="admin-subtle-text text-sm sm:text-base">
-                        A secao prioriza interesse real, nao vaidade de acesso.
+                        A seção prioriza interesse real, não vaidade de acesso.
                     </p>
                 </div>
 
@@ -447,7 +447,7 @@ export default function AdminDashboard() {
                             </h2>
                         </div>
                         <p className="admin-subtle-text text-sm">
-                            Volume total, tracao diaria e leitura semanal.
+                            Volume total, tração diária e leitura semanal.
                         </p>
                     </div>
 
@@ -549,7 +549,7 @@ export default function AdminDashboard() {
                     ) : (
                         <div className="mt-6 rounded-[1.75rem] border border-[color:var(--admin-line)] bg-white/70 px-6 py-8 text-center">
                             <p className="text-lg font-semibold text-[color:var(--admin-obsidian)]">
-                                Ainda nao ha produtos com interesse registrado.
+                                Ainda não há produtos com interesse registrado.
                             </p>
                             <p className="mt-2 text-sm admin-subtle-text">
                                 Assim que o cliente clicar no WhatsApp, o ranking passa a destacar os itens que mais puxam conversa.
@@ -560,12 +560,12 @@ export default function AdminDashboard() {
 
                 <section className="admin-panel p-6 sm:p-8">
                     <div>
-                        <p className="admin-kicker">Distribuicao do portfolio</p>
+                        <p className="admin-kicker">Distribuição do portfólio</p>
                         <h2 className="mt-2 text-2xl font-semibold text-[color:var(--admin-obsidian)]">
                             Produtos por categoria.
                         </h2>
                         <p className="mt-2 text-sm admin-subtle-text">
-                            Leitura rapida do peso de cada frente dentro do catalogo.
+                            Leitura rápida do peso de cada frente dentro do catálogo.
                         </p>
                     </div>
 
@@ -607,7 +607,7 @@ export default function AdminDashboard() {
                                 Nenhuma categoria encontrada.
                             </p>
                             <p className="mt-2 text-sm admin-subtle-text">
-                                Assim que os produtos forem classificados, esta secao passa a mostrar concentracao e equilibrio do portfolio.
+                                Assim que os produtos forem classificados, esta seção passa a mostrar concentração e equilíbrio do portfólio.
                             </p>
                         </div>
                     )}
@@ -617,9 +617,9 @@ export default function AdminDashboard() {
             <section className="admin-panel p-6 sm:p-8">
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                     <div>
-                        <p className="admin-kicker">Acoes rapidas</p>
+                        <p className="admin-kicker">Ações rápidas</p>
                         <h2 className="mt-2 text-2xl font-semibold text-[color:var(--admin-obsidian)]">
-                            Atalhos com cara de decisao, nao de menu solto.
+                            Atalhos com cara de decisão, não de menu solto.
                         </h2>
                     </div>
                     <p className="admin-subtle-text text-sm">
@@ -644,10 +644,10 @@ export default function AdminDashboard() {
                     <Link to="/admin/produtos" className="admin-list-card group p-5 sm:p-6">
                         <p className="admin-kicker">Curadoria</p>
                         <h3 className="mt-3 text-xl font-semibold text-[color:var(--admin-obsidian)]">
-                            Revisar portfolio
+                            Revisar portfólio
                         </h3>
                         <p className="mt-2 text-sm leading-6 admin-subtle-text">
-                            Ajuste ativos, refine categorias e acompanhe o que precisa de aprovacao visual.
+                            Ajuste ativos, refine categorias e acompanhe o que precisa de aprovação visual.
                         </p>
                         <span className="admin-button-secondary mt-6 w-full">
                             Ver produtos
@@ -655,12 +655,12 @@ export default function AdminDashboard() {
                     </Link>
 
                     <Link to="/" className="admin-list-card group p-5 sm:p-6">
-                        <p className="admin-kicker">Experiencia publica</p>
+                        <p className="admin-kicker">Experiência pública</p>
                         <h3 className="mt-3 text-xl font-semibold text-[color:var(--admin-obsidian)]">
-                            Abrir catalogo
+                            Abrir catálogo
                         </h3>
                         <p className="mt-2 text-sm leading-6 admin-subtle-text">
-                            Confira como as decisoes do backoffice aparecem na vitrine que o cliente final enxerga.
+                            Confira como as decisões do backoffice aparecem na vitrine que o cliente final enxerga.
                         </p>
                         <span className="admin-button-secondary mt-6 w-full">
                             Visualizar agora

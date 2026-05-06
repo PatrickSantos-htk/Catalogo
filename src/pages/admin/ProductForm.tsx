@@ -53,7 +53,7 @@ export default function ProductForm() {
             )
 
             if (error) throw error
-            if (!data) throw new Error('Produto nao encontrado')
+            if (!data) throw new Error('Produto não encontrado')
 
             setName(data.name)
             setDescription(data.description)
@@ -122,17 +122,17 @@ export default function ProductForm() {
 
     const validateForm = (): boolean => {
         if (!name.trim()) {
-            toast.error('Nome do produto e obrigatorio')
+            toast.error('Nome do produto é obrigatório')
             return false
         }
 
         if (!description.trim()) {
-            toast.error('Descricao e obrigatoria')
+            toast.error('Descrição é obrigatória')
             return false
         }
 
         if (!category.trim()) {
-            toast.error('Categoria e obrigatoria')
+            toast.error('Categoria é obrigatória')
             return false
         }
 
@@ -146,12 +146,12 @@ export default function ProductForm() {
         }
 
         if (!whatsappNumber.trim()) {
-            toast.error('Numero do WhatsApp e obrigatorio')
+            toast.error('Número do WhatsApp é obrigatório')
             return false
         }
 
         if (!isValidWhatsAppNumber(whatsappNumber)) {
-            toast.error('Numero do WhatsApp invalido. Use o formato: (XX) 9XXXX-XXXX')
+            toast.error('Número do WhatsApp inválido. Use o formato: (XX) 9XXXX-XXXX')
             return false
         }
 
@@ -262,29 +262,29 @@ export default function ProductForm() {
                         <p className="admin-kicker">Cadastro comercial</p>
                         <h1 className="mt-2 text-3xl font-semibold text-[color:var(--admin-obsidian)] sm:text-4xl">
                             {isEditing
-                                ? 'Refine um produto com mais criterio visual.'
+                                ? 'Refine um produto com mais critério visual.'
                                 : 'Monte um produto pronto para converter interesse em contato.'}
                         </h1>
                         <p className="mt-3 text-sm leading-7 admin-subtle-text sm:text-base">
-                            Estruture conteudo, escolha a estrategia comercial e deixe o item preparado para aparecer com mais clareza na vitrine publica.
+                            Estruture conteúdo, escolha a estratégia comercial e deixe o item preparado para aparecer com mais clareza na vitrine pública.
                         </p>
                     </div>
 
                     <div className="admin-panel-soft p-5">
-                        <p className="admin-kicker">Resumo da publicacao</p>
+                        <p className="admin-kicker">Resumo da publicação</p>
                         <div className="mt-4 flex flex-wrap gap-2">
                             <span className={`admin-chip ${pricingMode === 'starting_price' ? 'admin-chip--success' : 'admin-chip--warning'}`}>
-                                {pricingMode === 'starting_price' ? 'Com valor inicial' : 'Sob orcamento'}
+                                {pricingMode === 'starting_price' ? 'Com valor inicial' : 'Sob orçamento'}
                             </span>
                             <span className={`admin-chip ${active ? 'admin-chip--success' : 'admin-chip--danger'}`}>
                                 {active ? 'Ativo' : 'Em pausa'}
                             </span>
                             <span className={`admin-chip ${isPromotion ? 'admin-chip--warning' : 'admin-chip--neutral'}`}>
-                                {isPromotion ? 'Em promocao' : 'Sem promocao'}
+                                {isPromotion ? 'Em promoção' : 'Sem promoção'}
                             </span>
                         </div>
                         <p className="mt-4 text-sm leading-6 admin-subtle-text">
-                            Um bom cadastro aqui deixa a leitura do catalogo mais premium e facilita a abordagem do cliente no WhatsApp.
+                            Um bom cadastro aqui deixa a leitura do catálogo mais premium e facilita a abordagem do cliente no WhatsApp.
                         </p>
                     </div>
                 </div>
@@ -293,7 +293,7 @@ export default function ProductForm() {
             <form onSubmit={handleSubmit} className="space-y-6 lg:space-y-8">
                 <section className="admin-panel p-6 sm:p-8">
                     <h2 className="mb-6 text-xl font-semibold text-[color:var(--admin-obsidian)] sm:text-2xl">
-                        Informacoes Basicas
+                        Informações Básicas
                     </h2>
 
                     <div className="space-y-4">
@@ -312,7 +312,7 @@ export default function ProductForm() {
 
                         <div>
                             <label className="mb-2 block text-sm font-medium text-[color:var(--admin-bark)]">
-                                Descricao *
+                                Descrição *
                             </label>
                             <textarea
                                 value={description}
@@ -339,10 +339,10 @@ export default function ProductForm() {
                         <div className="admin-panel-soft space-y-4 p-4 sm:p-5">
                             <div>
                                 <p className="text-sm font-semibold text-[color:var(--admin-obsidian)]">
-                                    Forma de exibicao comercial
+                                    Forma de exibição comercial
                                 </p>
                                 <p className="mt-1 text-sm admin-subtle-text">
-                                    Escolha se o item sera exibido com valor inicial ou somente por orcamento.
+                                    Escolha se o item será exibido com valor inicial ou somente por orçamento.
                                 </p>
                             </div>
 
@@ -352,9 +352,9 @@ export default function ProductForm() {
                                     onClick={() => setPricingMode('quote')}
                                     className={`admin-toggle-card text-left ${pricingMode === 'quote' ? 'admin-toggle-card--active' : ''}`}
                                 >
-                                    <p className="text-sm font-semibold text-[color:var(--admin-obsidian)]">Somente orcamento</p>
+                                    <p className="text-sm font-semibold text-[color:var(--admin-obsidian)]">Somente orçamento</p>
                                     <p className="mt-2 text-xs leading-5 admin-subtle-text">
-                                        O card e o detalhe nao exibem valor, so o CTA de orcamento.
+                                        O card e o detalhe não exibem valor, só o CTA de orçamento.
                                     </p>
                                 </button>
 
@@ -365,7 +365,7 @@ export default function ProductForm() {
                                 >
                                     <p className="text-sm font-semibold text-[color:var(--admin-obsidian)]">Exibir valor inicial</p>
                                     <p className="mt-2 text-xs leading-5 admin-subtle-text">
-                                        O publico ve a partir de com o valor informado no card e no detalhe.
+                                        O público vê a partir de com o valor informado no card e no detalhe.
                                     </p>
                                 </button>
                             </div>
@@ -386,12 +386,12 @@ export default function ProductForm() {
                                         required
                                     />
                                     <p className="mt-2 text-xs admin-subtle-text">
-                                        Use o menor valor que faca sentido como ponto de partida comercial.
+                                        Use o menor valor que faça sentido como ponto de partida comercial.
                                     </p>
                                 </div>
                             ) : (
                                 <div className="rounded-2xl border border-[rgba(192,138,44,0.22)] bg-[color:var(--admin-warning-soft)] px-4 py-3 text-sm text-[color:var(--admin-bark)]">
-                                    Este item ficara com foco em contato e orcamento, sem exibir valor publico.
+                                    Este item ficará com foco em contato e orçamento, sem exibir valor público.
                                 </div>
                             )}
                         </div>
@@ -406,7 +406,7 @@ export default function ProductForm() {
                                     className="h-4 w-4 rounded border-[color:var(--admin-line-strong)] text-[color:var(--admin-obsidian)] focus:ring-[color:var(--admin-accent)]"
                                 />
                                 <label htmlFor="active" className="ml-3 block text-sm text-[color:var(--admin-bark)]">
-                                    Produto ativo (visivel no catalogo publico)
+                                    Produto ativo (visível no catálogo público)
                                 </label>
                             </div>
 
@@ -419,7 +419,7 @@ export default function ProductForm() {
                                     className="h-4 w-4 rounded border-[color:var(--admin-line-strong)] text-[color:var(--admin-danger)] focus:ring-[color:var(--admin-danger)]"
                                 />
                                 <label htmlFor="is_promotion" className="ml-3 block text-sm text-[color:var(--admin-bark)]">
-                                    Produto em promocao (destaque especial)
+                                    Produto em promoção (destaque especial)
                                 </label>
                             </div>
                         </div>
@@ -487,7 +487,7 @@ export default function ProductForm() {
                             className="admin-input text-sm"
                         />
                         <p className="mt-2 text-sm admin-subtle-text">
-                            PNG, JPG e WEBP ate 5MB. Multiplas imagens permitidas.
+                            PNG, JPG e WEBP até 5MB. Múltiplas imagens permitidas.
                         </p>
                     </div>
                 </section>
@@ -500,7 +500,7 @@ export default function ProductForm() {
                     <div className="space-y-4">
                         <div>
                             <label className="mb-2 block text-sm font-medium text-[color:var(--admin-bark)]">
-                                Numero do WhatsApp * (formato: 11999999999)
+                                Número do WhatsApp * (formato: 11999999999)
                             </label>
                             <input
                                 type="tel"
@@ -521,10 +521,10 @@ export default function ProductForm() {
                                 onChange={(event) => setWhatsappMessage(event.target.value)}
                                 className="admin-input min-h-[7rem] resize-y"
                                 rows={3}
-                                placeholder="Ex: Ola! Vi seu produto no catalogo e gostaria de mais informacoes."
+                                placeholder="Ex: Olá! Vi seu produto no catálogo e gostaria de mais informações."
                             />
                             <p className="mt-2 text-sm admin-subtle-text">
-                                Se deixar vazio, uma mensagem padrao sera usada.
+                                Se deixar vazio, uma mensagem padrão será usada.
                             </p>
                         </div>
                     </div>
@@ -533,7 +533,7 @@ export default function ProductForm() {
                 <section className="admin-panel p-6 sm:p-8">
                     <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <h2 className="text-xl font-semibold text-[color:var(--admin-obsidian)] sm:text-2xl">
-                            Especificacoes Tecnicas
+                            Especificações Técnicas
                         </h2>
                         <button
                             type="button"

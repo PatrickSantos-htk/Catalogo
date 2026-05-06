@@ -124,23 +124,23 @@ export default function AdminProducts() {
             <section className="admin-panel p-6 sm:p-8">
                 <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
                     <div className="max-w-3xl">
-                        <p className="admin-kicker">Curadoria do portfolio</p>
+                        <p className="admin-kicker">Curadoria do portfólio</p>
                         <h1 className="mt-2 text-3xl font-semibold text-[color:var(--admin-obsidian)] sm:text-4xl">
                             Produtos com leitura mais clara e comercial.
                         </h1>
                         <p className="mt-3 text-sm leading-7 admin-subtle-text sm:text-base">
-                            Esta tela foi organizada para revisar status, encontrar itens rapido e manter a vitrine consistente com o atendimento consultivo.
+                            Esta tela foi organizada para revisar status, encontrar itens rápido e manter a vitrine consistente com o atendimento consultivo.
                         </p>
                     </div>
 
                     <div className="grid gap-3 sm:grid-cols-3 xl:min-w-[28rem]">
                         <div className="admin-panel-soft p-4">
-                            <p className="admin-kicker">Visiveis</p>
+                            <p className="admin-kicker">Visíveis</p>
                             <p className="mt-3 text-2xl font-semibold text-[color:var(--admin-obsidian)]">
                                 {totalActive}
                             </p>
                             <p className="mt-2 text-sm admin-subtle-text">
-                                Itens ativos no catalogo.
+                                Itens ativos no catálogo.
                             </p>
                         </div>
 
@@ -150,7 +150,7 @@ export default function AdminProducts() {
                                 {totalInactive}
                             </p>
                             <p className="mt-2 text-sm admin-subtle-text">
-                                Produtos fora de exibicao.
+                                Produtos fora de exibição.
                             </p>
                         </div>
 
@@ -174,7 +174,7 @@ export default function AdminProducts() {
                             {filteredProducts.length} {filteredProducts.length === 1 ? 'produto encontrado' : 'produtos encontrados'}
                         </p>
                         <p className="mt-1 text-sm admin-subtle-text">
-                            Cada item pode aparecer com valor inicial ou somente por orcamento.
+                            Cada item pode aparecer com valor inicial ou somente por orçamento.
                         </p>
                     </div>
                     <Link to="/admin/produtos/novo" className="admin-button-primary w-full sm:w-auto">
@@ -240,7 +240,7 @@ export default function AdminProducts() {
                         <div>
                             <p className="admin-kicker">Lista operacional</p>
                             <h2 className="mt-2 text-2xl font-semibold text-[color:var(--admin-obsidian)]">
-                                Produtos prontos para acao rapida.
+                                Produtos prontos para ação rápida.
                             </h2>
                         </div>
                         <p className="admin-subtle-text text-sm">
@@ -315,7 +315,7 @@ export default function AdminProducts() {
                                     <th>Categoria</th>
                                     <th>Comercial</th>
                                     <th>Status</th>
-                                    <th>Acoes</th>
+                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>

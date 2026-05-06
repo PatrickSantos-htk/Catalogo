@@ -87,7 +87,7 @@ export default function AdminLayout() {
                     <div className="min-w-0 flex-1">
                         <div className="admin-sidebar-panel rounded-[28px] p-5 sm:p-6">
                             <span className="admin-sidebar-chip">
-                                Operacao premium
+                                Operação premium
                             </span>
 
                             <div className="mt-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-white/12 bg-white/10 text-white shadow-lg">
@@ -100,12 +100,12 @@ export default function AdminLayout() {
                                 Painel comercial
                             </h1>
                             <p className="mt-2 text-sm leading-6 text-white/68">
-                                Produtos, performance e atendimento em uma visao pensada para apresentar valor ao cliente final.
+                                Produtos, performance e atendimento em uma visão pensada para apresentar valor ao cliente final.
                             </p>
 
                             <div className="admin-sidebar-panel mt-5 rounded-2xl px-4 py-3">
                                 <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/50">
-                                    Sessao ativa
+                                    Sessão ativa
                                 </p>
                                 <p className="mt-2 truncate text-sm font-medium text-white/88">
                                     {user?.email}
@@ -176,26 +176,26 @@ export default function AdminLayout() {
 
                             <div className="min-w-0">
                                 <p className="admin-kicker">
-                                    Backoffice do catalogo
+                                    Backoffice do catálogo
                                 </p>
                                 <h2 className="mt-1 text-xl font-semibold text-[color:var(--admin-obsidian)] sm:text-2xl lg:text-3xl">
                                     {currentSection?.label ?? 'Painel Administrativo'}
                                 </h2>
                                 <p className="mt-1 truncate text-sm admin-subtle-text">
-                                    {currentSection?.description ?? 'Gestao visual, comercial e operacional do catalogo.'}
+                                    {currentSection?.description ?? 'Gestão visual, comercial e operacional do catálogo.'}
                                 </p>
                             </div>
                         </div>
 
                         <div className="hidden items-center gap-3 lg:flex">
                             <span className="admin-badge admin-badge-light">
-                                Conversao via WhatsApp
+                                Conversão via WhatsApp
                             </span>
                             <Link
                                 to="/"
                                 className="admin-button-secondary"
                             >
-                                Ver catalogo
+                                Ver catálogo
                             </Link>
                         </div>
                     </div>
